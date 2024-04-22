@@ -1,0 +1,122 @@
+﻿@model Patici.EDMX.Kullanici
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Login</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="~/Content/images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/Content/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
+    <link rel="stylesoeet" href="~/Content/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+</head>
+<body style="background: #007bff; background: linear-gradient(to right, #0062E6, #33AEFF);">
+    <!-- login section start-->
+    <div class="login_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"><b>Giriş yap</b></h5>
+                            <div class="header-container">
+                                <h4>Üye Değil misiniz? <a href="@Url.Action("KayitOl","Login")" style="color: #0d6efd;"> <b>Kayıt Ol</b></a></h4>
+                            </div>
+                            <form class="form-signin" action="/Login/Index/" method="post">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(x => x.Email, new { type = "text", @class = "form-control", placeholder = "Email adresi", required = "required" })
+                                    <label for="inputEmail">Email adresi</label>
+                                </div>
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(x => x.Parola, new { type = "password", @class = "form-control", placeholder = "******", required = "required" })
+                                    <label for="inputPassword">Parola</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    @Html.CheckBox("BeniHatirla", false, new { type = "checkbox", @class = "custom-control-input" })
+                                    <label class="custom-control-label" for="BeniHatirla">Beni Hatırla</label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4"></div><div class="col-4">
+                                        <button class="btn btn-lg btn-primary btn-block text-uppercase text-center" type="submit">Gİrİş Yap</button>
+                                    </div><div class="col-4"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- login section end-->
+    <!-- footer section start-->
+    <!-- footer section end-->
+    <!-- copyright section start-->
+    <!-- copyright section end-->
+    <!-- Javascript files-->
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/js/jquery-3.0.0.min.js"></script>
+    <script src="~/Content/js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="~/Content/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Content/js/custom.js"></script>
+    <!-- javascript -->
+    <script src="~/Content/js/owl.carousel.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Rol seçildiğinde olay dinleyici
+            $('#exampleFormControlSelect1').change(function () {
+                var selectedRole = $(this).val();
+
+                // Eğer "Pati Dostu" seçildiyse formu gizle
+                if (selectedRole === 'Pati Dostu') {
+                    $('.form-group').hide();
+                } else {
+                    // Diğer durumlarda formu göster
+                    $('.form-group').show();
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            })
+        });
+    </script>
+</body>
+</html>

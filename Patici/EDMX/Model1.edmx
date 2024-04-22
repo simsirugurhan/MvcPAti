@@ -1,0 +1,1160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PatiDostuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FiyatAraligi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hayvan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KulDetayID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TurID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="YasID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Aciklama" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HayvanCins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HayvanCinsiyet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HayvanGaleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HayvanID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Foto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sira" Type="int" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HayvanTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HayCinsID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HayvanYas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ilan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TurID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HayvanID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KulDetayID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IlanTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Iletisim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Mesaj" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="Konum" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Parola" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KullaniciDetay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KulID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TurID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FiyatID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Onay" Type="bit" />
+          <Property Name="Belge" Type="nvarchar(max)" />
+          <Property Name="Website" Type="nvarchar(max)" />
+          <Property Name="Facebook" Type="nvarchar(max)" />
+          <Property Name="Twitter" Type="nvarchar(max)" />
+          <Property Name="Instagram" Type="nvarchar(max)" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KullaniciTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Otel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KulDetayID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Yayin" Type="bit" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtelGaleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KulDetayID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OtelID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Foto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sira" Type="int" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtelTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OtelID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HayTurID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Hayvan_HayvanTur">
+          <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hayvan">
+              <PropertyRef Name="TurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hayvan_HayvanYas">
+          <End Role="HayvanYas" Type="Self.HayvanYas" Multiplicity="1" />
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanYas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hayvan">
+              <PropertyRef Name="YasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hayvan_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hayvan">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HayvanGaleri_Hayvan">
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="1" />
+          <End Role="HayvanGaleri" Type="Self.HayvanGaleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hayvan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HayvanGaleri">
+              <PropertyRef Name="HayvanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HayvanTur_HayvanCins">
+          <End Role="HayvanCins" Type="Self.HayvanCins" Multiplicity="1" />
+          <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanCins">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HayvanTur">
+              <PropertyRef Name="HayCinsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilan_Hayvan">
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="1" />
+          <End Role="Ilan" Type="Self.Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hayvan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="HayvanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilan_IlanTur">
+          <End Role="IlanTur" Type="Self.IlanTur" Multiplicity="1" />
+          <End Role="Ilan" Type="Self.Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IlanTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="TurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilan_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="Ilan" Type="Self.Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciDetay_FiyatAraligi">
+          <End Role="FiyatAraligi" Type="Self.FiyatAraligi" Multiplicity="1" />
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiyatAraligi">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciDetay">
+              <PropertyRef Name="FiyatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciDetay_Kullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciDetay">
+              <PropertyRef Name="KulID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciDetay_KullaniciTur">
+          <End Role="KullaniciTur" Type="Self.KullaniciTur" Multiplicity="1" />
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciDetay">
+              <PropertyRef Name="TurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otel_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="Otel" Type="Self.Otel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Otel">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelGaleri_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="OtelGaleri" Type="Self.OtelGaleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelGaleri">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelGaleri_Otel">
+          <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
+          <End Role="OtelGaleri" Type="Self.OtelGaleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelGaleri">
+              <PropertyRef Name="OtelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelTur_HayvanTur">
+          <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
+          <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelTur">
+              <PropertyRef Name="HayTurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelTur_Otel">
+          <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
+          <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelTur">
+              <PropertyRef Name="OtelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PatiDostuModelStoreContainer">
+          <EntitySet Name="FiyatAraligi" EntityType="Self.FiyatAraligi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hayvan" EntityType="Self.Hayvan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HayvanCins" EntityType="Self.HayvanCins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HayvanCinsiyet" EntityType="Self.HayvanCinsiyet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HayvanGaleri" EntityType="Self.HayvanGaleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HayvanTur" EntityType="Self.HayvanTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HayvanYas" EntityType="Self.HayvanYas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilan" EntityType="Self.Ilan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IlanTur" EntityType="Self.IlanTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Iletisim" EntityType="Self.Iletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciDetay" EntityType="Self.KullaniciDetay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciTur" EntityType="Self.KullaniciTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Otel" EntityType="Self.Otel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtelGaleri" EntityType="Self.OtelGaleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtelTur" EntityType="Self.OtelTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Hayvan_HayvanTur" Association="Self.FK_Hayvan_HayvanTur">
+            <End Role="HayvanTur" EntitySet="HayvanTur" />
+            <End Role="Hayvan" EntitySet="Hayvan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hayvan_HayvanYas" Association="Self.FK_Hayvan_HayvanYas">
+            <End Role="HayvanYas" EntitySet="HayvanYas" />
+            <End Role="Hayvan" EntitySet="Hayvan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hayvan_KullaniciDetay" Association="Self.FK_Hayvan_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+            <End Role="Hayvan" EntitySet="Hayvan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HayvanGaleri_Hayvan" Association="Self.FK_HayvanGaleri_Hayvan">
+            <End Role="Hayvan" EntitySet="Hayvan" />
+            <End Role="HayvanGaleri" EntitySet="HayvanGaleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HayvanTur_HayvanCins" Association="Self.FK_HayvanTur_HayvanCins">
+            <End Role="HayvanCins" EntitySet="HayvanCins" />
+            <End Role="HayvanTur" EntitySet="HayvanTur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilan_Hayvan" Association="Self.FK_Ilan_Hayvan">
+            <End Role="Hayvan" EntitySet="Hayvan" />
+            <End Role="Ilan" EntitySet="Ilan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilan_IlanTur" Association="Self.FK_Ilan_IlanTur">
+            <End Role="IlanTur" EntitySet="IlanTur" />
+            <End Role="Ilan" EntitySet="Ilan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilan_KullaniciDetay" Association="Self.FK_Ilan_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+            <End Role="Ilan" EntitySet="Ilan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciDetay_FiyatAraligi" Association="Self.FK_KullaniciDetay_FiyatAraligi">
+            <End Role="FiyatAraligi" EntitySet="FiyatAraligi" />
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciDetay_Kullanici" Association="Self.FK_KullaniciDetay_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciDetay_KullaniciTur" Association="Self.FK_KullaniciDetay_KullaniciTur">
+            <End Role="KullaniciTur" EntitySet="KullaniciTur" />
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otel_KullaniciDetay" Association="Self.FK_Otel_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+            <End Role="Otel" EntitySet="Otel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelGaleri_KullaniciDetay" Association="Self.FK_OtelGaleri_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
+            <End Role="OtelGaleri" EntitySet="OtelGaleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelGaleri_Otel" Association="Self.FK_OtelGaleri_Otel">
+            <End Role="Otel" EntitySet="Otel" />
+            <End Role="OtelGaleri" EntitySet="OtelGaleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelTur_HayvanTur" Association="Self.FK_OtelTur_HayvanTur">
+            <End Role="HayvanTur" EntitySet="HayvanTur" />
+            <End Role="OtelTur" EntitySet="OtelTur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelTur_Otel" Association="Self.FK_OtelTur_Otel">
+            <End Role="Otel" EntitySet="Otel" />
+            <End Role="OtelTur" EntitySet="OtelTur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PatiDostuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FiyatAraligi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KullaniciDetays" Relationship="Self.FK_KullaniciDetay_FiyatAraligi" FromRole="FiyatAraligi" ToRole="KullaniciDetay" />
+        </EntityType>
+        <EntityType Name="Hayvan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="KulDetayID" Type="Guid" Nullable="false" />
+          <Property Name="TurID" Type="Guid" Nullable="false" />
+          <Property Name="YasID" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HayvanTur" Relationship="Self.FK_Hayvan_HayvanTur" FromRole="Hayvan" ToRole="HayvanTur" />
+          <NavigationProperty Name="HayvanYa" Relationship="Self.FK_Hayvan_HayvanYas" FromRole="Hayvan" ToRole="HayvanYas" />
+          <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Hayvan_KullaniciDetay" FromRole="Hayvan" ToRole="KullaniciDetay" />
+          <NavigationProperty Name="HayvanGaleris" Relationship="Self.FK_HayvanGaleri_Hayvan" FromRole="Hayvan" ToRole="HayvanGaleri" />
+          <NavigationProperty Name="Ilans" Relationship="Self.FK_Ilan_Hayvan" FromRole="Hayvan" ToRole="Ilan" />
+        </EntityType>
+        <EntityType Name="HayvanCin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HayvanTurs" Relationship="Self.FK_HayvanTur_HayvanCins" FromRole="HayvanCins" ToRole="HayvanTur" />
+        </EntityType>
+        <EntityType Name="HayvanCinsiyet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HayvanGaleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="HayvanID" Type="Guid" Nullable="false" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sira" Type="Int32" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Hayvan" Relationship="Self.FK_HayvanGaleri_Hayvan" FromRole="HayvanGaleri" ToRole="Hayvan" />
+        </EntityType>
+        <EntityType Name="HayvanTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="HayCinsID" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Hayvans" Relationship="Self.FK_Hayvan_HayvanTur" FromRole="HayvanTur" ToRole="Hayvan" />
+          <NavigationProperty Name="HayvanCin" Relationship="Self.FK_HayvanTur_HayvanCins" FromRole="HayvanTur" ToRole="HayvanCins" />
+          <NavigationProperty Name="OtelTurs" Relationship="Self.FK_OtelTur_HayvanTur" FromRole="HayvanTur" ToRole="OtelTur" />
+        </EntityType>
+        <EntityType Name="HayvanYa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Hayvans" Relationship="Self.FK_Hayvan_HayvanYas" FromRole="HayvanYas" ToRole="Hayvan" />
+        </EntityType>
+        <EntityType Name="Ilan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TurID" Type="Guid" Nullable="false" />
+          <Property Name="HayvanID" Type="Guid" Nullable="false" />
+          <Property Name="KulDetayID" Type="Guid" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Hayvan" Relationship="Self.FK_Ilan_Hayvan" FromRole="Ilan" ToRole="Hayvan" />
+          <NavigationProperty Name="IlanTur" Relationship="Self.FK_Ilan_IlanTur" FromRole="Ilan" ToRole="IlanTur" />
+          <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Ilan_KullaniciDetay" FromRole="Ilan" ToRole="KullaniciDetay" />
+        </EntityType>
+        <EntityType Name="IlanTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ilans" Relationship="Self.FK_Ilan_IlanTur" FromRole="IlanTur" ToRole="Ilan" />
+        </EntityType>
+        <EntityType Name="Iletisim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Konum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Parola" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KullaniciDetays" Relationship="Self.FK_KullaniciDetay_Kullanici" FromRole="Kullanici" ToRole="KullaniciDetay" />
+        </EntityType>
+        <EntityType Name="KullaniciDetay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="KulID" Type="Guid" Nullable="false" />
+          <Property Name="TurID" Type="Guid" Nullable="false" />
+          <Property Name="FiyatID" Type="Guid" Nullable="false" />
+          <Property Name="AdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Onay" Type="Boolean" />
+          <Property Name="Belge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Instagram" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FiyatAraligi" Relationship="Self.FK_KullaniciDetay_FiyatAraligi" FromRole="KullaniciDetay" ToRole="FiyatAraligi" />
+          <NavigationProperty Name="Hayvans" Relationship="Self.FK_Hayvan_KullaniciDetay" FromRole="KullaniciDetay" ToRole="Hayvan" />
+          <NavigationProperty Name="Ilans" Relationship="Self.FK_Ilan_KullaniciDetay" FromRole="KullaniciDetay" ToRole="Ilan" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK_KullaniciDetay_Kullanici" FromRole="KullaniciDetay" ToRole="Kullanici" />
+          <NavigationProperty Name="KullaniciTur" Relationship="Self.FK_KullaniciDetay_KullaniciTur" FromRole="KullaniciDetay" ToRole="KullaniciTur" />
+          <NavigationProperty Name="Otels" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="KullaniciDetay" ToRole="Otel" />
+          <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_KullaniciDetay" FromRole="KullaniciDetay" ToRole="OtelGaleri" />
+        </EntityType>
+        <EntityType Name="KullaniciTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KullaniciDetays" Relationship="Self.FK_KullaniciDetay_KullaniciTur" FromRole="KullaniciTur" ToRole="KullaniciDetay" />
+        </EntityType>
+        <EntityType Name="Otel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="KulDetayID" Type="Guid" Nullable="false" />
+          <Property Name="Yayin" Type="Boolean" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="Otel" ToRole="KullaniciDetay" />
+          <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_Otel" FromRole="Otel" ToRole="OtelGaleri" />
+          <NavigationProperty Name="OtelTurs" Relationship="Self.FK_OtelTur_Otel" FromRole="Otel" ToRole="OtelTur" />
+        </EntityType>
+        <EntityType Name="OtelGaleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="KulDetayID" Type="Guid" Nullable="false" />
+          <Property Name="OtelID" Type="Guid" Nullable="false" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sira" Type="Int32" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_OtelGaleri_KullaniciDetay" FromRole="OtelGaleri" ToRole="KullaniciDetay" />
+          <NavigationProperty Name="Otel" Relationship="Self.FK_OtelGaleri_Otel" FromRole="OtelGaleri" ToRole="Otel" />
+        </EntityType>
+        <EntityType Name="OtelTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OtelID" Type="Guid" Nullable="false" />
+          <Property Name="HayTurID" Type="Guid" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HayvanTur" Relationship="Self.FK_OtelTur_HayvanTur" FromRole="OtelTur" ToRole="HayvanTur" />
+          <NavigationProperty Name="Otel" Relationship="Self.FK_OtelTur_Otel" FromRole="OtelTur" ToRole="Otel" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_KullaniciDetay_FiyatAraligi">
+          <End Role="FiyatAraligi" Type="Self.FiyatAraligi" Multiplicity="1" />
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiyatAraligi">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciDetay">
+              <PropertyRef Name="FiyatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hayvan_HayvanTur">
+          <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hayvan">
+              <PropertyRef Name="TurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hayvan_HayvanYas">
+          <End Role="HayvanYas" Type="Self.HayvanYa" Multiplicity="1" />
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanYas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hayvan">
+              <PropertyRef Name="YasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hayvan_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hayvan">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HayvanGaleri_Hayvan">
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="1" />
+          <End Role="HayvanGaleri" Type="Self.HayvanGaleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hayvan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HayvanGaleri">
+              <PropertyRef Name="HayvanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilan_Hayvan">
+          <End Role="Hayvan" Type="Self.Hayvan" Multiplicity="1" />
+          <End Role="Ilan" Type="Self.Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hayvan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="HayvanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HayvanTur_HayvanCins">
+          <End Role="HayvanCins" Type="Self.HayvanCin" Multiplicity="1" />
+          <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanCins">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HayvanTur">
+              <PropertyRef Name="HayCinsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelTur_HayvanTur">
+          <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
+          <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HayvanTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelTur">
+              <PropertyRef Name="HayTurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilan_IlanTur">
+          <End Role="IlanTur" Type="Self.IlanTur" Multiplicity="1" />
+          <End Role="Ilan" Type="Self.Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IlanTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="TurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilan_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="Ilan" Type="Self.Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciDetay_Kullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciDetay">
+              <PropertyRef Name="KulID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciDetay_KullaniciTur">
+          <End Role="KullaniciTur" Type="Self.KullaniciTur" Multiplicity="1" />
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciDetay">
+              <PropertyRef Name="TurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otel_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="Otel" Type="Self.Otel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Otel">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelGaleri_KullaniciDetay">
+          <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="1" />
+          <End Role="OtelGaleri" Type="Self.OtelGaleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelGaleri">
+              <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelGaleri_Otel">
+          <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
+          <End Role="OtelGaleri" Type="Self.OtelGaleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelGaleri">
+              <PropertyRef Name="OtelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtelTur_Otel">
+          <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
+          <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelTur">
+              <PropertyRef Name="OtelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FiyatAraligis" EntityType="Self.FiyatAraligi" />
+          <EntitySet Name="Hayvans" EntityType="Self.Hayvan" />
+          <EntitySet Name="HayvanCins" EntityType="Self.HayvanCin" />
+          <EntitySet Name="HayvanCinsiyets" EntityType="Self.HayvanCinsiyet" />
+          <EntitySet Name="HayvanGaleris" EntityType="Self.HayvanGaleri" />
+          <EntitySet Name="HayvanTurs" EntityType="Self.HayvanTur" />
+          <EntitySet Name="HayvanYas" EntityType="Self.HayvanYa" />
+          <EntitySet Name="Ilans" EntityType="Self.Ilan" />
+          <EntitySet Name="IlanTurs" EntityType="Self.IlanTur" />
+          <EntitySet Name="Iletisims" EntityType="Self.Iletisim" />
+          <EntitySet Name="Kullanicis" EntityType="Self.Kullanici" />
+          <EntitySet Name="KullaniciDetays" EntityType="Self.KullaniciDetay" />
+          <EntitySet Name="KullaniciTurs" EntityType="Self.KullaniciTur" />
+          <EntitySet Name="Otels" EntityType="Self.Otel" />
+          <EntitySet Name="OtelGaleris" EntityType="Self.OtelGaleri" />
+          <EntitySet Name="OtelTurs" EntityType="Self.OtelTur" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_KullaniciDetay_FiyatAraligi" Association="Self.FK_KullaniciDetay_FiyatAraligi">
+            <End Role="FiyatAraligi" EntitySet="FiyatAraligis" />
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hayvan_HayvanTur" Association="Self.FK_Hayvan_HayvanTur">
+            <End Role="HayvanTur" EntitySet="HayvanTurs" />
+            <End Role="Hayvan" EntitySet="Hayvans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hayvan_HayvanYas" Association="Self.FK_Hayvan_HayvanYas">
+            <End Role="HayvanYas" EntitySet="HayvanYas" />
+            <End Role="Hayvan" EntitySet="Hayvans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hayvan_KullaniciDetay" Association="Self.FK_Hayvan_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+            <End Role="Hayvan" EntitySet="Hayvans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HayvanGaleri_Hayvan" Association="Self.FK_HayvanGaleri_Hayvan">
+            <End Role="Hayvan" EntitySet="Hayvans" />
+            <End Role="HayvanGaleri" EntitySet="HayvanGaleris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilan_Hayvan" Association="Self.FK_Ilan_Hayvan">
+            <End Role="Hayvan" EntitySet="Hayvans" />
+            <End Role="Ilan" EntitySet="Ilans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HayvanTur_HayvanCins" Association="Self.FK_HayvanTur_HayvanCins">
+            <End Role="HayvanCins" EntitySet="HayvanCins" />
+            <End Role="HayvanTur" EntitySet="HayvanTurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelTur_HayvanTur" Association="Self.FK_OtelTur_HayvanTur">
+            <End Role="HayvanTur" EntitySet="HayvanTurs" />
+            <End Role="OtelTur" EntitySet="OtelTurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilan_IlanTur" Association="Self.FK_Ilan_IlanTur">
+            <End Role="IlanTur" EntitySet="IlanTurs" />
+            <End Role="Ilan" EntitySet="Ilans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilan_KullaniciDetay" Association="Self.FK_Ilan_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+            <End Role="Ilan" EntitySet="Ilans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciDetay_Kullanici" Association="Self.FK_KullaniciDetay_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanicis" />
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciDetay_KullaniciTur" Association="Self.FK_KullaniciDetay_KullaniciTur">
+            <End Role="KullaniciTur" EntitySet="KullaniciTurs" />
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otel_KullaniciDetay" Association="Self.FK_Otel_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+            <End Role="Otel" EntitySet="Otels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelGaleri_KullaniciDetay" Association="Self.FK_OtelGaleri_KullaniciDetay">
+            <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
+            <End Role="OtelGaleri" EntitySet="OtelGaleris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelGaleri_Otel" Association="Self.FK_OtelGaleri_Otel">
+            <End Role="Otel" EntitySet="Otels" />
+            <End Role="OtelGaleri" EntitySet="OtelGaleris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelTur_Otel" Association="Self.FK_OtelTur_Otel">
+            <End Role="Otel" EntitySet="Otels" />
+            <End Role="OtelTur" EntitySet="OtelTurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PatiDostuModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="FiyatAraligis">
+            <EntityTypeMapping TypeName="PatiDostuModel.FiyatAraligi">
+              <MappingFragment StoreEntitySet="FiyatAraligi">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hayvans">
+            <EntityTypeMapping TypeName="PatiDostuModel.Hayvan">
+              <MappingFragment StoreEntitySet="Hayvan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KulDetayID" ColumnName="KulDetayID" />
+                <ScalarProperty Name="TurID" ColumnName="TurID" />
+                <ScalarProperty Name="YasID" ColumnName="YasID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HayvanCins">
+            <EntityTypeMapping TypeName="PatiDostuModel.HayvanCin">
+              <MappingFragment StoreEntitySet="HayvanCins">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HayvanCinsiyets">
+            <EntityTypeMapping TypeName="PatiDostuModel.HayvanCinsiyet">
+              <MappingFragment StoreEntitySet="HayvanCinsiyet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HayvanGaleris">
+            <EntityTypeMapping TypeName="PatiDostuModel.HayvanGaleri">
+              <MappingFragment StoreEntitySet="HayvanGaleri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HayvanID" ColumnName="HayvanID" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Sira" ColumnName="Sira" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HayvanTurs">
+            <EntityTypeMapping TypeName="PatiDostuModel.HayvanTur">
+              <MappingFragment StoreEntitySet="HayvanTur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HayCinsID" ColumnName="HayCinsID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HayvanYas">
+            <EntityTypeMapping TypeName="PatiDostuModel.HayvanYa">
+              <MappingFragment StoreEntitySet="HayvanYas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilans">
+            <EntityTypeMapping TypeName="PatiDostuModel.Ilan">
+              <MappingFragment StoreEntitySet="Ilan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TurID" ColumnName="TurID" />
+                <ScalarProperty Name="HayvanID" ColumnName="HayvanID" />
+                <ScalarProperty Name="KulDetayID" ColumnName="KulDetayID" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IlanTurs">
+            <EntityTypeMapping TypeName="PatiDostuModel.IlanTur">
+              <MappingFragment StoreEntitySet="IlanTur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Iletisims">
+            <EntityTypeMapping TypeName="PatiDostuModel.Iletisim">
+              <MappingFragment StoreEntitySet="Iletisim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicis">
+            <EntityTypeMapping TypeName="PatiDostuModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Konum" ColumnName="Konum" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciDetays">
+            <EntityTypeMapping TypeName="PatiDostuModel.KullaniciDetay">
+              <MappingFragment StoreEntitySet="KullaniciDetay">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KulID" ColumnName="KulID" />
+                <ScalarProperty Name="TurID" ColumnName="TurID" />
+                <ScalarProperty Name="FiyatID" ColumnName="FiyatID" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Onay" ColumnName="Onay" />
+                <ScalarProperty Name="Belge" ColumnName="Belge" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciTurs">
+            <EntityTypeMapping TypeName="PatiDostuModel.KullaniciTur">
+              <MappingFragment StoreEntitySet="KullaniciTur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otels">
+            <EntityTypeMapping TypeName="PatiDostuModel.Otel">
+              <MappingFragment StoreEntitySet="Otel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KulDetayID" ColumnName="KulDetayID" />
+                <ScalarProperty Name="Yayin" ColumnName="Yayin" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtelGaleris">
+            <EntityTypeMapping TypeName="PatiDostuModel.OtelGaleri">
+              <MappingFragment StoreEntitySet="OtelGaleri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KulDetayID" ColumnName="KulDetayID" />
+                <ScalarProperty Name="OtelID" ColumnName="OtelID" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Sira" ColumnName="Sira" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtelTurs">
+            <EntityTypeMapping TypeName="PatiDostuModel.OtelTur">
+              <MappingFragment StoreEntitySet="OtelTur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OtelID" ColumnName="OtelID" />
+                <ScalarProperty Name="HayTurID" ColumnName="HayTurID" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PatiDostuModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -41,6 +41,7 @@ namespace Patici.EDMX
         public virtual DbSet<Otel> Otels { get; set; }
         public virtual DbSet<OtelGaleri> OtelGaleris { get; set; }
         public virtual DbSet<OtelTur> OtelTurs { get; set; }
+        public virtual DbSet<Sehir> Sehirs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

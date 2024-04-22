@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Patici.Manager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,12 +12,8 @@ namespace Patici.Controllers
         // GET: Veteriner
         public ActionResult Index()
         {
-            return View();
-        }
-        
-        public ActionResult Detay(int veterinerId)
-        {
-            //id gore getir
+            ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
+
             return View();
         }
     }

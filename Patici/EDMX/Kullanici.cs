@@ -21,14 +21,15 @@ namespace Patici.EDMX
         }
     
         public System.Guid Id { get; set; }
+        public Nullable<System.Guid> SehirID { get; set; }
         public string AdSoyad { get; set; }
         public string Telefon { get; set; }
-        public string Konum { get; set; }
         public string Email { get; set; }
         public string Parola { get; set; }
         public System.DateTime Tarih { get; set; }
         public bool Sil { get; set; }
     
+        public virtual Sehir Sehir { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KullaniciDetay> KullaniciDetays { get; set; }
     }

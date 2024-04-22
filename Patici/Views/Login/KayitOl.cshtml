@@ -35,6 +35,15 @@
     <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
     <link rel="stylesoeet" href="~/Content/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            height: 38px;
+            padding: 4px 5px;
+        }
+    </style>
 
 </head>
 <body style="background: #007bff; background: linear-gradient(to right, #0062E6, #33AEFF);">
@@ -59,8 +68,7 @@
                                     <label for="Telefon">Telefon Numarası</label>
                                 </div>
                                 <div class="form-label-group">
-                                    @Html.TextBoxFor(x => x.Konum, new { type = "text", @class = "form-control", placeholder = "Konum", required = "required" })
-                                    <label for="Konum">Konum</label>
+                                    @Html.DropDownListFor(s => s.SehirID, (SelectList)ViewBag.Sehir, " -Konum- ", new { @class = "select2 form-control", required = "required" })
                                 </div>
                                 <div class="form-label-group">
                                     @Html.TextBoxFor(x => x.Email, new { type = "email", @class = "form-control", placeholder = "Email adresi", required = "required" })
@@ -102,6 +110,14 @@
     <script src="~/Content/js/owl.carousel.js"></script>
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#SehirID').select2({
+                allowClear: true
+            });
+        });
+    </script>
     <script>
         $(document).ready(function () {
             // Rol seçildiğinde olay dinleyici

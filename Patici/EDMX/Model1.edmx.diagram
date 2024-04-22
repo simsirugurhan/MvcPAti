@@ -4,24 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d2fc80cabcf640b1804051333c84b4ea" Name="Diagram1">
-        <EntityTypeShape EntityType="PatiDostuModel.FiyatAraligi" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.Hayvan" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.HayvanCin" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.HayvanCinsiyet" Width="1.5" PointX="9.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.HayvanGaleri" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.HayvanTur" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.HayvanYa" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.Ilan" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.IlanTur" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.Iletisim" Width="1.5" PointX="10.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.Kullanici" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.KullaniciDetay" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.KullaniciTur" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.Otel" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.OtelGaleri" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.OtelTur" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatiDostuModel.sysdiagram" Width="1.5" PointX="11.75" PointY="11.5" IsExpanded="true" />
+      <Diagram DiagramId="9c3a3fa7e769480b8603d0133752ebec" Name="Diagram1">
+        <EntityTypeShape EntityType="PatiDostuModel.FiyatAraligi" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.Hayvan" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.HayvanCin" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.HayvanCinsiyet" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.HayvanGaleri" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.HayvanTur" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.HayvanYa" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.Ilan" Width="1.5" PointX="12.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.IlanTur" Width="1.5" PointX="10.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.Iletisim" Width="1.5" PointX="11.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.Kullanici" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.KullaniciDetay" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.KullaniciTur" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.Otel" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.OtelGaleri" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.OtelTur" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.Sehir" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatiDostuModel.sysdiagram" Width="1.5" PointX="12.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="PatiDostuModel.FK_KullaniciDetay_FiyatAraligi" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_Hayvan_HayvanTur" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_Hayvan_HayvanYas" ManuallyRouted="false" />
@@ -32,6 +33,7 @@
         <AssociationConnector Association="PatiDostuModel.FK_OtelTur_HayvanTur" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_Ilan_IlanTur" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_Ilan_KullaniciDetay" ManuallyRouted="false" />
+        <AssociationConnector Association="PatiDostuModel.FK_Kullanici_Sehir" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_KullaniciDetay_Kullanici" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_KullaniciDetay_KullaniciTur" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_Otel_KullaniciDetay" ManuallyRouted="false" />

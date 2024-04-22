@@ -12,20 +12,20 @@ namespace Patici.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class FiyatAraligi
+    public partial class Sehir
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FiyatAraligi()
+        public Sehir()
         {
-            this.KullaniciDetays = new HashSet<KullaniciDetay>();
+            this.Kullanicis = new HashSet<Kullanici>();
         }
     
         public System.Guid Id { get; set; }
+        public int Plaka { get; set; }
         public string Ad { get; set; }
         public bool Sil { get; set; }
-        public int Sira { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KullaniciDetay> KullaniciDetays { get; set; }
+        public virtual ICollection<Kullanici> Kullanicis { get; set; }
     }
 }

@@ -57,9 +57,18 @@
                         </li>
                     </ul>
 
-                    <div class="ms-4">
-                        <a href="@Url.Action("Index","Login")" class="btn custom-btn custom-border-btn smoothscroll">Giriş Yap</a>
-                    </div>
+                    @if (Session["KullaniciId"] != null)
+                    {
+                        <div class="ms-4">
+                            <a href="@Url.Action("Index","Profil")" class="btn custom-btn custom-border-btn smoothscroll">Profil</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="ms-4">
+                            <a href="@Url.Action("Index","Login")" class="btn custom-btn custom-border-btn smoothscroll">Giriş Yap</a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>

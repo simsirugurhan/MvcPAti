@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PatiDostuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PatiDostuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FiyatAraligi">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sira" Type="int" Nullable="false" />
           <Property Name="Sil" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Hayvan">
@@ -105,9 +106,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SehirID" Type="uniqueidentifier" />
           <Property Name="AdSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Telefon" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="Konum" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Parola" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Tarih" Type="datetime" Nullable="false" />
@@ -166,6 +167,15 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OtelID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="HayTurID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Plaka" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Sil" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -271,6 +281,18 @@
             </Principal>
             <Dependent Role="Ilan">
               <PropertyRef Name="KulDetayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanici_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="SehirID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,6 +409,7 @@
           <EntitySet Name="Otel" EntityType="Self.Otel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtelGaleri" EntityType="Self.OtelGaleri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtelTur" EntityType="Self.OtelTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Hayvan_HayvanTur" Association="Self.FK_Hayvan_HayvanTur">
             <End Role="HayvanTur" EntitySet="HayvanTur" />
@@ -419,6 +442,10 @@
           <AssociationSet Name="FK_Ilan_KullaniciDetay" Association="Self.FK_Ilan_KullaniciDetay">
             <End Role="KullaniciDetay" EntitySet="KullaniciDetay" />
             <End Role="Ilan" EntitySet="Ilan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Sehir" Association="Self.FK_Kullanici_Sehir">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
           </AssociationSet>
           <AssociationSet Name="FK_KullaniciDetay_FiyatAraligi" Association="Self.FK_KullaniciDetay_FiyatAraligi">
             <End Role="FiyatAraligi" EntitySet="FiyatAraligi" />
@@ -453,8 +480,7 @@
             <End Role="OtelTur" EntitySet="OtelTur" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PatiDostuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -466,6 +492,7 @@
           <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Sil" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="KullaniciDetays" Relationship="Self.FK_KullaniciDetay_FiyatAraligi" FromRole="FiyatAraligi" ToRole="KullaniciDetay" />
+          <Property Name="Sira" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Hayvan">
           <Key>
@@ -574,13 +601,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SehirID" Type="Guid" />
           <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Telefon" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Konum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Parola" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sehir" Relationship="Self.FK_Kullanici_Sehir" FromRole="Kullanici" ToRole="Sehir" />
           <NavigationProperty Name="KullaniciDetays" Relationship="Self.FK_KullaniciDetay_Kullanici" FromRole="Kullanici" ToRole="KullaniciDetay" />
         </EntityType>
         <EntityType Name="KullaniciDetay">
@@ -652,6 +680,16 @@
           <Property Name="Sil" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="HayvanTur" Relationship="Self.FK_OtelTur_HayvanTur" FromRole="OtelTur" ToRole="HayvanTur" />
           <NavigationProperty Name="Otel" Relationship="Self.FK_OtelTur_Otel" FromRole="OtelTur" ToRole="Otel" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Plaka" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Kullanicis" Relationship="Self.FK_Kullanici_Sehir" FromRole="Sehir" ToRole="Kullanici" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -783,6 +821,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Kullanici_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="SehirID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_KullaniciDetay_Kullanici">
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
           <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
@@ -872,6 +922,7 @@
           <EntitySet Name="Otels" EntityType="Self.Otel" />
           <EntitySet Name="OtelGaleris" EntityType="Self.OtelGaleri" />
           <EntitySet Name="OtelTurs" EntityType="Self.OtelTur" />
+          <EntitySet Name="Sehirs" EntityType="Self.Sehir" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_KullaniciDetay_FiyatAraligi" Association="Self.FK_KullaniciDetay_FiyatAraligi">
             <End Role="FiyatAraligi" EntitySet="FiyatAraligis" />
@@ -913,6 +964,10 @@
             <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
             <End Role="Ilan" EntitySet="Ilans" />
           </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Sehir" Association="Self.FK_Kullanici_Sehir">
+            <End Role="Sehir" EntitySet="Sehirs" />
+            <End Role="Kullanici" EntitySet="Kullanicis" />
+          </AssociationSet>
           <AssociationSet Name="FK_KullaniciDetay_Kullanici" Association="Self.FK_KullaniciDetay_Kullanici">
             <End Role="Kullanici" EntitySet="Kullanicis" />
             <End Role="KullaniciDetay" EntitySet="KullaniciDetays" />
@@ -947,6 +1002,7 @@
           <EntitySetMapping Name="FiyatAraligis">
             <EntityTypeMapping TypeName="PatiDostuModel.FiyatAraligi">
               <MappingFragment StoreEntitySet="FiyatAraligi">
+                <ScalarProperty Name="Sira" ColumnName="Sira" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Sil" ColumnName="Sil" />
@@ -1053,9 +1109,9 @@
             <EntityTypeMapping TypeName="PatiDostuModel.Kullanici">
               <MappingFragment StoreEntitySet="Kullanici">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SehirID" ColumnName="SehirID" />
                 <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
                 <ScalarProperty Name="Telefon" ColumnName="Telefon" />
-                <ScalarProperty Name="Konum" ColumnName="Konum" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Parola" ColumnName="Parola" />
                 <ScalarProperty Name="Tarih" ColumnName="Tarih" />
@@ -1119,6 +1175,16 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OtelID" ColumnName="OtelID" />
                 <ScalarProperty Name="HayTurID" ColumnName="HayTurID" />
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sehirs">
+            <EntityTypeMapping TypeName="PatiDostuModel.Sehir">
+              <MappingFragment StoreEntitySet="Sehir">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Sil" ColumnName="Sil" />
               </MappingFragment>
             </EntityTypeMapping>

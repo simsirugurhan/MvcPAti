@@ -33,9 +33,9 @@ namespace Patici.Manager
             Kullanici deger = new Kullanici
             {
                 Id = Guid.NewGuid(),
+                SehirID = kullanici.SehirID,
                 AdSoyad = kullanici.AdSoyad,
                 Email = kullanici.Email,
-                Konum = kullanici.Konum,
                 Parola = kullanici.Parola,
                 Tarih = DateTime.Now,
                 Telefon = kullanici.Telefon,
@@ -47,5 +47,11 @@ namespace Patici.Manager
 
             return Task.FromResult(deger);
         }
+
+        #region Şehirler
+
+        public static List<Sehir> GetSehir() => db.Sehirs.Where(x => !x.Sil).OrderBy(x => x.Plaka).ToList();
+        
+        #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Patici.EDMX.Iletisim
+
+@{
     ViewBag.Title = "İletişim";
 }
 
@@ -14,6 +16,10 @@
 
 <section class="section-padding" id="section_2">
     <div class="container">
+        @if (ViewBag.Mesaj != null)
+        {
+            <h3 style="color:blue;">@ViewBag.Mesaj</h3>
+        }
         <div class="row justify-content-center">
             <div class="col-lg-5 col-12 pe-lg-5">
                 <div class="contact-info">
@@ -45,35 +51,30 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-12 mx-auto">
-                <div class="section-title-wrap mb-5">
+                <div class="section-title-wrap mb-4 mt-4">
                     <h4 class="section-title">İletişim Formu</h4>
                 </div>
-                <form action="#" method="post" class="custom-form contact-form" role="form">
+                <form action="/Home/Iletisim/" method="post" class="custom-form contact-form" role="form">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
-                                <input type="text" name="full-name" id="full-name" class="form-control"
-                                       placeholder="Full Name" required="">
-                                <label for="floatingInput">İsim</label>
+                                @Html.TextBoxFor(x => x.AdSoyad, new { type = "text", @class = "form-control", placeholder = "Ad Soyad", required = "required" })
+                                <label for="AdSoyad">Ad Soyad</label>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
-                                <input type="email" name="email" id="email"
-                                       class="form-control" placeholder="Email address" required="">
-
-                                <label for="floatingInput">Email adresi</label>
+                                @Html.TextBoxFor(x => x.Email, new { type = "email", @class = "form-control", placeholder = "Email adresi", required = "required" })
+                                <label for="Email">Email adresi</label>
                             </div>
                         </div>
                         <div class="col-lg-12 col-12">
                             <div class="form-floating">
-                                <textarea class="form-control" id="message" name="message"
-                                          placeholder="Describe message here"></textarea>
-
-                                <label for="floatingTextarea">Mesajınızı buraya yazabilirsiniz</label>
+                                @Html.TextAreaFor(x => x.Mesaj, new { type = "text", @class = "form-control", placeholder = "Mesajınızı buraya yazın", required = "required" })
+                                <label for="Mesaj">Mesajınızı buraya yazabilirsiniz</label>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-12 ms-auto">
+                        <div class="col-lg-4 col-12 ms-auto mb-4">
                             <button type="submit" class="form-control">Gönder</button>
                         </div>
                     </div>

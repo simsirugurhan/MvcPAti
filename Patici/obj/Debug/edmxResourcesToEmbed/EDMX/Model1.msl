@@ -4,6 +4,7 @@
     <EntitySetMapping Name="FiyatAraligis">
       <EntityTypeMapping TypeName="PatiDostuModel.FiyatAraligi">
         <MappingFragment StoreEntitySet="FiyatAraligi">
+          <ScalarProperty Name="Sira" ColumnName="Sira" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ad" ColumnName="Ad" />
           <ScalarProperty Name="Sil" ColumnName="Sil" />
@@ -110,9 +111,9 @@
       <EntityTypeMapping TypeName="PatiDostuModel.Kullanici">
         <MappingFragment StoreEntitySet="Kullanici">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SehirID" ColumnName="SehirID" />
           <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
           <ScalarProperty Name="Telefon" ColumnName="Telefon" />
-          <ScalarProperty Name="Konum" ColumnName="Konum" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Parola" ColumnName="Parola" />
           <ScalarProperty Name="Tarih" ColumnName="Tarih" />
@@ -176,6 +177,16 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="OtelID" ColumnName="OtelID" />
           <ScalarProperty Name="HayTurID" ColumnName="HayTurID" />
+          <ScalarProperty Name="Sil" ColumnName="Sil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sehirs">
+      <EntityTypeMapping TypeName="PatiDostuModel.Sehir">
+        <MappingFragment StoreEntitySet="Sehir">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
           <ScalarProperty Name="Sil" ColumnName="Sil" />
         </MappingFragment>
       </EntityTypeMapping>

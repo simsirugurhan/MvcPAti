@@ -33,6 +33,8 @@ namespace Patici.Controllers
                 FormsAuthentication.SignOut();
                 FormsAuthentication.SetAuthCookie(yanit.Id.ToString(), BeniHatirla);
 
+                Session["KullaniciId"] = yanit.Id;
+
                 return Redirect("/Home/Index");
             }
 
@@ -44,6 +46,7 @@ namespace Patici.Controllers
         public ActionResult KayitOl()
         {
             var model = new Kullanici();
+            ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
 
             return View(model);
         }
@@ -52,13 +55,13 @@ namespace Patici.Controllers
         public ActionResult KayitOl(Kullanici kullanici)
         {
             //var login = new LoginManager();
-            var kul = LoginManager.Kaydol(kullanici);
+            var kul = LoginManager.Kaydol(kullanici).Result;
 
             if (kul != null)
             {
                 ViewBag.KulID = kul.Id;
                 FormsAuthentication.SignOut();
-
+                Session["KullaniciId"] = kul.Id;
                 //profil sayfasına at
                 return Redirect("/Home/Index");
             }

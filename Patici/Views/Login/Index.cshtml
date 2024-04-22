@@ -48,7 +48,12 @@
                             <h5 class="card-title text-center"><b>Giriş yap</b></h5>
                             <div class="header-container">
                                 <h4>Üye Değil misiniz? <a href="@Url.Action("KayitOl","Login")" style="color: #0d6efd;"> <b>Kayıt Ol</b></a></h4>
+
                             </div>
+                            @if (ViewBag.Hata != null)
+                            {
+                                <h3 class="d-block" style="color:red;">@ViewBag.Hata</h3>
+                            }
                             <form class="form-signin" action="/Login/Index/" method="post">
                                 <div class="form-label-group">
                                     @Html.TextBoxFor(x => x.Email, new { type = "text", @class = "form-control", placeholder = "Email adresi", required = "required" })

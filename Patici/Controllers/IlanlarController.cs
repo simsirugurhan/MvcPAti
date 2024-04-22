@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Patici.Manager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,11 +17,17 @@ namespace Patici.Controllers
 
         public ActionResult Sahiplendirme()
         {
+            ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
+            ViewBag.Cins = new SelectList(IlanManager.GetCins().ToList(), "Id", "Ad");
+
             return View();
         }
 
         public ActionResult Kayip()
         {
+            ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
+            ViewBag.Cins = new SelectList(IlanManager.GetCins().ToList(), "Id", "Ad");
+
             return View();
         }
     }

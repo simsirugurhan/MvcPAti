@@ -34,12 +34,9 @@
                     <div class="row no-gutters">
                         <div class="col-md-4 col-6">
                             <div class=" p-4 border-0">
-                                <label for="locationSelect">Şehir</label>
+                                <label>Şehir</label>
                                 <div class="form-field">
-                                    <select id="locationSelect" class="form-control">
-                                        <option value="">Nereye</option>
-                                        <!-- Türkiye'nin 81 ilinin optionları burada yer alacak -->
-                                    </select>
+                                    @Html.DropDownList("SehirID", (SelectList)ViewBag.Sehir, " -Konum- ", new { @class = "select2 form-control" })
                                 </div>
                             </div>
                         </div>
@@ -47,10 +44,7 @@
                             <div class=" p-4">
                                 <label>Cins</label>
                                 <div class="form-field">
-                                    <select class="form-control">
-                                        <option value="">Kedi</option>
-                                        <option value="">Köpek</option>
-                                    </select>
+                                    @Html.DropDownList("CinsID", (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control" })
                                 </div>
                             </div>
                         </div>
@@ -84,7 +78,6 @@
                         <p>aspmca poscmpdsmcapo posamcapmcpm pomcsdvnsokl psdvmsodvmdpoş spdvmosdmv spodvmsodmvl psdvmsdmv spodvmosmdv</p>
                         <p class="badge mb-0"> Buca</p>
                         <p class="badge mb-0">50 0521 213 13 21</p>
-
                     </div>
                 </div>
             </div>
@@ -243,15 +236,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            // Türkiye'nin illeri JSON olarak (gerçek bir projede bu veri bir sunucudan alınabilir)
-            var cities = ["Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", "Aydın", "Balıkesir", "Bartın", "Batman", "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Düzce", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkâri", "Hatay", "Iğdır", "Isparta", "İstanbul", "İzmir", "Kahramanmaraş", "Karabük", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kilis", "Kırıkkale", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Mardin", "Mersin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Şanlıurfa", "Şırnak", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak"];
-            // Select2'yi başlat ve illeri seçenek olarak ekle
-            $('#locationSelect').select2({
-                placeholder: "Nereye",
-                allowClear: true,
-                data: cities.map(function (city) {
-                    return { id: city, text: city };
-                })
+            $('.select2').select2({
+                allowClear: true
             });
         });
     </script>

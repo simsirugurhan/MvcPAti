@@ -25,6 +25,7 @@
           <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Aciklama" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Tasma" Type="bit" Nullable="false" />
           <Property Name="Sil" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="HayvanCins">
@@ -106,7 +107,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SehirID" Type="uniqueidentifier" />
+          <Property Name="SehirID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AdSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Telefon" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
@@ -125,6 +126,7 @@
           <Property Name="AdSoyad" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Onay" Type="bit" />
           <Property Name="Belge" Type="nvarchar(max)" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
           <Property Name="Website" Type="nvarchar(max)" />
           <Property Name="Facebook" Type="nvarchar(max)" />
           <Property Name="Twitter" Type="nvarchar(max)" />
@@ -285,7 +287,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Kullanici_Sehir">
-          <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sehir">
@@ -490,9 +492,9 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sira" Type="Int32" Nullable="false" />
           <Property Name="Sil" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="KullaniciDetays" Relationship="Self.FK_KullaniciDetay_FiyatAraligi" FromRole="FiyatAraligi" ToRole="KullaniciDetay" />
-          <Property Name="Sira" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Hayvan">
           <Key>
@@ -505,6 +507,7 @@
           <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Tasma" Type="Boolean" Nullable="false" />
           <Property Name="Sil" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="HayvanTur" Relationship="Self.FK_Hayvan_HayvanTur" FromRole="Hayvan" ToRole="HayvanTur" />
           <NavigationProperty Name="HayvanYa" Relationship="Self.FK_Hayvan_HayvanYas" FromRole="Hayvan" ToRole="HayvanYas" />
@@ -601,7 +604,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SehirID" Type="Guid" />
+          <Property Name="SehirID" Type="Guid" Nullable="false" />
           <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Telefon" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -635,6 +638,7 @@
           <NavigationProperty Name="KullaniciTur" Relationship="Self.FK_KullaniciDetay_KullaniciTur" FromRole="KullaniciDetay" ToRole="KullaniciTur" />
           <NavigationProperty Name="Otels" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="KullaniciDetay" ToRole="Otel" />
           <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_KullaniciDetay" FromRole="KullaniciDetay" ToRole="OtelGaleri" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="KullaniciTur">
           <Key>
@@ -822,7 +826,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Kullanici_Sehir">
-          <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sehir">
@@ -1002,9 +1006,9 @@
           <EntitySetMapping Name="FiyatAraligis">
             <EntityTypeMapping TypeName="PatiDostuModel.FiyatAraligi">
               <MappingFragment StoreEntitySet="FiyatAraligi">
-                <ScalarProperty Name="Sira" ColumnName="Sira" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Sira" ColumnName="Sira" />
                 <ScalarProperty Name="Sil" ColumnName="Sil" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1019,6 +1023,7 @@
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
                 <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Tasma" ColumnName="Tasma" />
                 <ScalarProperty Name="Sil" ColumnName="Sil" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1122,6 +1127,7 @@
           <EntitySetMapping Name="KullaniciDetays">
             <EntityTypeMapping TypeName="PatiDostuModel.KullaniciDetay">
               <MappingFragment StoreEntitySet="KullaniciDetay">
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="KulID" ColumnName="KulID" />
                 <ScalarProperty Name="TurID" ColumnName="TurID" />

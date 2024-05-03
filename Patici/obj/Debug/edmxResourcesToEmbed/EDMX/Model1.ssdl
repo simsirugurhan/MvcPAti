@@ -20,6 +20,7 @@
     <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Aciklama" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Tarih" Type="datetime" Nullable="false" />
+    <Property Name="Tasma" Type="bit" Nullable="false" />
     <Property Name="Sil" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="HayvanCins">
@@ -101,7 +102,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="SehirID" Type="uniqueidentifier" />
+    <Property Name="SehirID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AdSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Telefon" Type="nvarchar" MaxLength="14" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
@@ -120,6 +121,7 @@
     <Property Name="AdSoyad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Onay" Type="bit" />
     <Property Name="Belge" Type="nvarchar(max)" />
+    <Property Name="Aciklama" Type="nvarchar(max)" />
     <Property Name="Website" Type="nvarchar(max)" />
     <Property Name="Facebook" Type="nvarchar(max)" />
     <Property Name="Twitter" Type="nvarchar(max)" />
@@ -280,7 +282,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Kullanici_Sehir">
-    <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+    <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
     <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sehir">

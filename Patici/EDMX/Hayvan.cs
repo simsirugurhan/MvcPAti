@@ -28,6 +28,7 @@ namespace Patici.EDMX
         public string Ad { get; set; }
         public string Aciklama { get; set; }
         public System.DateTime Tarih { get; set; }
+        public bool Tasma { get; set; }
         public bool Sil { get; set; }
     
         public virtual HayvanTur HayvanTur { get; set; }

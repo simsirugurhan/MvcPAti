@@ -36,6 +36,7 @@ namespace Patici.EDMX
         public string Instagram { get; set; }
         public System.DateTime Tarih { get; set; }
         public bool Sil { get; set; }
+        public string Aciklama { get; set; }
     
         public virtual FiyatAraligi FiyatAraligi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -18,5 +18,10 @@ namespace Patici.Controllers
 
             return View();
         }
+
+        public ActionResult OtelDetay(Guid otelId)
+        {
+            return View();
+        }
     }
 }

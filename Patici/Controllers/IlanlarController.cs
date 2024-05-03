@@ -30,5 +30,12 @@ namespace Patici.Controllers
 
             return View();
         }
+
+        public ActionResult IlanDetay(int ilanId)
+        {
+            
+
+            return View();
+        }
     }
 }

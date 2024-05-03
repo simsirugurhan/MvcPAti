@@ -21,7 +21,7 @@ namespace Patici.EDMX
         }
     
         public System.Guid Id { get; set; }
-        public Nullable<System.Guid> SehirID { get; set; }
+        public System.Guid SehirID { get; set; }
         public string AdSoyad { get; set; }
         public string Telefon { get; set; }
         public string Email { get; set; }

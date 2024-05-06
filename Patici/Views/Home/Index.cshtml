@@ -2,30 +2,40 @@
     ViewBag.Title = "Anasayfa";
 }
 
-<section class="hero-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-12">
-                <div class="text-center mb-5 pb-2">
-                    <h1 class="text-white">Kayıp İlanları</h1>
-                </div>
-                <div class="owl-carousel owl-theme">
-                    <div class="owl-carousel-info-wrap item">
-                        <img src="~/Content/images/profile/lostdog1.jpg" class="owl-carousel-image img-fluid">
+@{
+    var ilanlar = Patici.Manager.IlanManager.GetKayipIlanlar();
+}
 
-                        <div class="owl-carousel-info">
-                            <h4 class="mb-2">
-                                Karabas
-                            </h4>
-                            <span class="badge">Bornova</span>
-                            <span class="badge">0 555 777 444 33</span>
-                        </div>
+@if (ilanlar.Count > 0)
+{
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="text-center mb-5 pb-2">
+                        <h1 class="text-white">Kayıp İlanları</h1>
                     </div>
+                    @foreach (var i in ilanlar)
+                    {
+                        var galeri = Patici.Manager.IlanManager.GetHayvanGaleriFromIlan(i.Id);
+                        <div class="owl-carousel owl-theme">
+                            <div class="owl-carousel-info-wrap item">
+                                <img src="@galeri.First().Foto" class="owl-carousel-image img-fluid">
+                                <div class="owl-carousel-info">
+                                    <h4 class="mb-2">
+                                        @i.Hayvan.Ad
+                                    </h4>
+                                    <span class="badge">@i.KullaniciDetay.Kullanici.Sehir.Ad</span>
+                                    <span class="badge">@i.KullaniciDetay.Kullanici.Telefon</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
 
 <div class="marketing_section layout_padding">
     <div class="container-fluid">
@@ -101,175 +111,43 @@
     </div>
 </div>
 
+@{
+    var patiler = Patici.Manager.IlanManager.GetSahiplendirmeIlanlar();
+}
 
-<section class="topics-section section-padding pb-0" id="section_3">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-12 col-12">
-                <div class="section-title-wrap mb-5 mt-5">
-                    <h4 class="section-title">Pati İlanları</h4>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-                        <p>aspmca poscmpdsmcapo posamcapmcpm pomcsdvnsokl psdvmsodvmdpoş spdvmosdmv spodvmsodmvl psdvmsdmv spodvmosmdv</p>
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
+@if (patiler.Count > 0)
+{
+    <section class="topics-section section-padding pb-0" id="section_3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="section-title-wrap mb-5 mt-5">
+                        <h4 class="section-title">Pati İlanları</h4>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabaş
+                @foreach (var p in patiler)
+                {
+                    var galeri = Patici.Manager.IlanManager.GetHayvanGaleriFromIlan(p.Id);
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block custom-block-overlay">
+                            <a href="@Url.Action("IlanDetay","Ilanlar", new {ilanId = p.Id})" class="custom-block-image-wrap">
+                                <img src="@galeri.First().Foto"
+                                     class="custom-block-image img-fluid" alt="">
                             </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
+                            <div class="custom-block-info custom-block-overlay-info">
+                                <h5 class="mb-1">
+                                    <a href="@Url.Action("IlanDetay","Ilanlar", new {ilanId = p.Id})">
+                                        @p.Hayvan.Ad
+                                    </a>
+                                </h5>
+                                <p> @p.Hayvan.Aciklama</p>
+                                <p class="badge mb-0"> @p.KullaniciDetay.Kullanici.Sehir.Ad</p>
+                                <p class="badge mb-0">@p.KullaniciDetay.Kullanici.Telefon</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-                    </div>
-                </div>
+                }
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}

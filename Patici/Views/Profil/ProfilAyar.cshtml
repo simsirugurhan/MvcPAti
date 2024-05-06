@@ -1,0 +1,89 @@
+﻿@model Patici.EDMX.Kullanici
+@{
+    ViewBag.Title = "Profil Ayar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            height: 57px;
+            padding: 4px 5px;
+        }
+    </style>
+}
+
+<header class="site-header d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center">
+                <h2 class="mb-0">Profil Ayarları</h2>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="contact-section section-padding pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <form action="#" method="post" class="custom-form contact-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.TextBoxFor(x => x.AdSoyad, new { type = "text", @class = "form-control", placeholder = "İsim", required = "required" })
+                                <label for="AdSoyad">Ad Soyad</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.TextBoxFor(x => x.Email, new { type = "email", @class = "form-control", placeholder = "Email adresi", required = "required" })
+                                <label for="Email">Email</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.TextBoxFor(x => x.Telefon, new { type = "text", @class = "form-control", placeholder = "Telefon Numarası", required = "required" })
+                                <label for="Telefon">Telefon Numarası</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownListFor(s => s.SehirID, (SelectList)ViewBag.Sehir, Model.Sehir.Ad, new { @class = "select2 form-control", required = "required" })
+                                <label for="SehirID">Konum</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.TextBoxFor(x => x.Parola, new { type = "password", @class = "form-control", placeholder = "******", required = "required" })
+                                <label for="Parola">Parola</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group mb-4">
+                                <label for="exampleFormControlFile1">Profil Fotoğrafı</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="profilFoto">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 ms-auto pt-3">
+                            <button type="submit" class="form-control">Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('.select2').select2({
+                allowClear: true
+            });
+        });
+    </script>
+}

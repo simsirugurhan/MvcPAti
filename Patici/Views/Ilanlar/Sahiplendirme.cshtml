@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Patici.EDMX.Ilan>
 @{
     ViewBag.Title = "Sahiplendirme İlanları";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,6 +14,7 @@
         }
     </style>
 }
+
 <header class="site-header d-flex flex-column justify-content-center align-items-center">
     <div class="container">
         <div class="row">
@@ -28,7 +29,7 @@
     <div class="col-md-12 tab-wrap">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="#" class="search-property-1">
+                <form action="/Ilanlar/Sahiplendirme" method="post" class="search-property-1">
                     <div class="row no-gutters">
                         <div class="col-md-4 col-6">
                             <div class=" p-4 border-0">
@@ -60,190 +61,33 @@
 
 <section class="topics-section section-padding pb-0" id="section_3">
     <div class="container">
+        @if (ViewBag.Mesaj != null)
+        {
+            <h3 style="color:red;">@ViewBag.Mesaj</h3>
+        }
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-                        <p>aspmca poscmpdsmcapo posamcapmcpm pomcsdvnsokl psdvmsodvmdpoş spdvmosdmv spodvmsodmvl psdvmsdmv spodvmosmdv</p>
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
+            @foreach (var m in Model)
+            {
+                var galeri = Patici.Manager.IlanManager.GetHayvanGaleriFromIlan(m.Id);
+                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="custom-block custom-block-overlay">
+                        <a href="@Url.Action("IlanDetay","Ilanlar", new {ilanId = m.Id})" class="custom-block-image-wrap">
+                            <img src="@galeri.First().Foto"
+                                 class="custom-block-image img-fluid" alt="">
+                        </a>
+                        <div class="custom-block-info custom-block-overlay-info">
+                            <h5 class="mb-1">
+                                <a href="listing-page.html">
+                                    @m.Hayvan.Ad
+                                </a>
+                            </h5>
+                            <p>@m.Hayvan.Aciklama</p>
+                            <p class="badge mb-0"> @m.KullaniciDetay.Kullanici.Sehir.Ad</p>
+                            <p class="badge mb-0">@m.KullaniciDetay.Kullanici.Telefon</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="~/Content/images/profile/lostdog1.jpg"
-                             class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Karabas
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0"> Buca</p>
-                        <p class="badge mb-0">50 0521 213 13 21</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="d-block"></div>
-            <div class="col-lg-4 col-12 mx-auto mb-4">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg justify-content-center mt-5">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            }
         </div>
     </div>
 </section>

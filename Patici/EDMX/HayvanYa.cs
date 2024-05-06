@@ -23,6 +23,7 @@ namespace Patici.EDMX
         public System.Guid Id { get; set; }
         public string Ad { get; set; }
         public bool Sil { get; set; }
+        public int Sira { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hayvan> Hayvans { get; set; }

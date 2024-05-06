@@ -5,6 +5,439 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
-    @Session["kullaniciId"].ToString()
-</p>
+@section styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            height: 57px;
+            padding: 4px 5px;
+        }
+    </style>
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            height: 57px;
+            padding: 4px 5px;
+        }
+
+        body {
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            height: 57px;
+            padding: 4px 5px;
+        }
+
+        #section_2 img {
+            width: 400px;
+            height: 500px;
+        }
+    </style>
+}
+
+<header class="site-header d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center">
+                <h2 class="mb-0">Profil</h2>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="section-padding" id="section_2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-12 pe-lg-5">
+                <div class="contact-info">
+                    <h3 class="mb-4">Bilgilerim</h3>
+                    <p class="d-flex border-bottom pb-3 mb-4">
+                        <strong class="d-inline me-4">İsim:</strong>
+                        <span>@Model.Kullanici.AdSoyad</span>
+                    </p>
+                    <p class="d-flex border-bottom pb-3 mb-4">
+                        <strong class="d-inline me-4">Telefon:</strong>
+                        <span>@Model.Kullanici.Telefon</span>
+                    </p>
+                    <p class="d-flex border-bottom pb-3 mb-4">
+                        <strong class="d-inline me-4">Email:</strong>
+                        <a href="mailto:@Model.Kullanici.Email">@Model.Kullanici.Email</a>
+                    </p>
+                    <p class="d-flex">
+                        <strong class="d-inline me-4">Konum:</strong>
+                        <span>@Model.Kullanici.Sehir.Ad</span>
+                    </p>
+                    <a href="@Url.Action("ProfilAyar","Profil", new {kulId = Model.KulID})">
+                        <button>Düzenle</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12 mt-5 mt-lg-0">
+                <img class="kullanıcı"
+                     src="@Model.ProfilFoto"
+                     width="40%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                     referrerpolicy="no-referrer-when-downgrade">
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (Model.TurID == Guid.Parse("8a88dc29-2854-4193-a1c1-f08d602ced0c"))
+{
+    <section class="contact-section section-padding pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12 mx-auto">
+                    <div class="section-title-wrap mb-5">
+                        <h4 class="section-title">Otellerim</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="section_2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-12 mt-0 mt-lg-0">
+                    <div id="hotelCarousel" class="carousel slide" data-bs-ride="carousel">
+                        @{
+                            var galeri = Patici.Manager.OtelManager.GetOtelGaleriFromKulDetay(Model.Id);
+                        }
+
+                        <!-- Indicators/dots -->
+                        <div class="carousel-indicators">
+                            @foreach (var g in galeri)
+                            {
+                                if (g.Sira == 1)
+                                {
+                                    <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira" class="active"></button>
+                                }
+                                else
+                                {
+                                    <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira"></button>
+                                }
+                            }
+                        </div>
+                        <!-- The slideshow/carousel -->
+                        <div class="carousel-inner">
+                            @foreach (var g in galeri)
+                            {
+                                if (g.Sira == 1)
+                                {
+                                    <div class="carousel-item active">
+                                        <img src="@g.Foto" class="d-block w-100">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <img src="@g.Foto" class="d-block w-100">
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <!-- Left and right controls/icons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+                @{
+                    var otel = Patici.Manager.OtelManager.GetOtelFromKulDetay(Model.Id);
+                    var otelTur = Patici.Manager.OtelManager.GetOtelTur(otel.Id);
+                }
+                <div class="col-lg-5 col-12 pe-lg-5">
+                    <div class="contact-info">
+                        <h3 class="mb-1">@Model.AdSoyad</h3>
+                        <h5 class="mb-4">@otelTur</h5>
+                        <p>@Model.Aciklama</p>
+                        <p class="d-flex border-bottom pb-3 mb-4">
+                            <strong class="d-inline me-4">Fiyat:</strong>
+                            <span>@Model.FiyatAraligi.Ad</span>
+                        </p>
+                        <p class="d-flex border-bottom pb-3 mb-4">
+                            <strong class="d-inline me-4">Sahip:</strong>
+                            <span>@Model.Kullanici.AdSoyad</span>
+                        </p>
+                        <p class="d-flex border-bottom pb-3 mb-4">
+                            <strong class="d-inline me-4">Telefon:</strong>
+                            <span>@Model.Kullanici.Telefon</span>
+                        </p>
+                        <p class="d-flex">
+                            <strong class="d-inline me-4">Konum:</strong>
+                            <span>@Model.Kullanici.Sehir.Ad</span>
+                        </p>
+                        <a href="@Url.Action("OtelAyar","Oteller",new {otelId = otel.Id})">
+                            <button>Düzenle</button>
+                        </a>
+                        <button style="background-color: red;">Sil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@{
+    var ilanlar = Patici.Manager.IlanManager.GetIlanlarFromKulDetay(Model.Id);
+}
+
+@if (ilanlar.Count > 0)
+{
+    <section class="contact-section section-padding pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12 mx-auto">
+                    <div class="section-title-wrap mb-5">
+                        <h4 class="section-title">İlanlarım</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @foreach (var i in ilanlar)
+    {
+        <section class="section-padding" id="section_2">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 col-12 mt-0 mt-lg-0">
+                        <div id="adsCarousel" class="carousel slide" data-bs-ride="carousel">
+                            @{
+                                var galeri = Patici.Manager.IlanManager.GetHayvanGaleriFromIlan(i.Id);
+                            }
+
+                            <!-- Indicators/dots -->
+                            <div class="carousel-indicators">
+                                @foreach (var g in galeri)
+                                {
+                                    if (g.Sira == 1)
+                                    {
+                                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira" class="active"></button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira"></button>
+                                    }
+                                }
+                            </div>
+                            <!-- The slideshow/carousel -->
+                            <div class="carousel-inner">
+                                @foreach (var g in galeri)
+                                {
+                                    if (g.Sira == 1)
+                                    {
+                                        <div class="carousel-item active">
+                                            <img src="@g.Foto" class="d-block w-100">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item">
+                                            <img src="@g.Foto" class="d-block w-100">
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <!-- Left and right controls/icons -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-12 pe-lg-5">
+                        <div class="contact-info">
+                            <h3 class="mb-1">@i.Hayvan.Ad</h3>
+                            <h5 class="mb-4">@i.Hayvan.HayvanTur.Ad</h5>
+                            <p>@i.Hayvan.Aciklama</p>
+                            <p class="d-flex border-bottom pb-3 mb-4">
+                                <strong class="d-inline me-4">Sahip:</strong>
+                                <span>@i.KullaniciDetay.Kullanici.AdSoyad</span>
+                            </p>
+                            <p class="d-flex border-bottom pb-3 mb-4">
+                                <strong class="d-inline me-4">Tasma:</strong>
+                                @{
+                                    string tasma = i.Hayvan.Tasma == true ? "Var" : "Yok";
+                                }
+                                <span>
+                                    @tasma
+                                </span>
+                            </p>
+                            <p class="d-flex border-bottom pb-3 mb-4">
+                                <strong class="d-inline me-4">Yaş:</strong>
+                                <span>@i.Hayvan.HayvanYa.Ad</span>
+                            </p>
+                            <p class="d-flex border-bottom pb-3 mb-4">
+                                <strong class="d-inline me-4">Telefon:</strong>
+                                <span>@i.KullaniciDetay.Kullanici.Telefon</span>
+                            </p>
+                            <p class="d-flex">
+                                <strong class="d-inline me-4">Konum:</strong>
+                                <span>@i.KullaniciDetay.Kullanici.Sehir.Ad</span>
+                            </p>
+                            <a href="@Url.Action("IlanAyar","Ilanlar",new {ilanId = i.Id})">
+                                <button>Düzenle</button>
+                            </a>
+                            <button class="complete-button">Tamamlandı</button>
+                            <button style="background-color: red;">Sil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}
+
+<section class="contact-section section-padding pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <div class="section-title-wrap mb-5">
+                    <h4 class="section-title">İlan ver</h4>
+                </div>
+                <form action="#" method="post" class="custom-form contact-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("IlanTur", (SelectList)ViewBag.IlanTur, " - Tür - ", new { @class = "select2 form-control" })
+                                <label for="IlanTur">İlan Tür</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating">
+                                @Html.TextBox("HayvanAd", new { type = "text", @class = "form-control", placeholder = "Hayvan Adı", required = "required" })
+                                <label for="HayvanAd">Evcil Hayvanın İsmi</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("CinsID", (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control" })
+                                <label for="CinID">Cinsi</label>
+                            </div>
+                        </div>
+
+                        @*BURASI DAHA SONRA KÖPEK VEYA KEDİ GÖRE GETİRİLECEK*@
+
+
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("TurID", (SelectList)ViewBag.Tur, " -Cins- ", new { @class = "select2 form-control" })
+                                <label for="TurID">Türü</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.CheckBox("Tasma", false, new { type = "checkbox", @class = "form-control" })
+                                <label for="Tasma">Tasması var mı?</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("YasID", (SelectList)ViewBag.Yas, " -Yaş- ", new { @class = "select2 form-control" })
+                                <label for="YasID">Kaç yaşında</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Fotoğraf</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="hayvanFotos" multiple>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <div class="form-floating mt-3">
+                                @Html.TextArea("HayvanAciklama", new { @class = "form-control", placeholder = "Açıklama giriniz" })
+                                <label for="HayvanAciklama">Bilgileri buraya yazabilirsiniz</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 ms-auto">
+                            <button type="submit" class="form-control">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('.select2').select2({
+                allowClear: true
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Existing JavaScript code ...
+
+            // Event listeners for delete buttons
+            document.querySelectorAll('button[style="background-color: red;"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    Swal.fire({
+                        title: "Emin misin?",
+                        text: "Bu işlem geri alınamaz!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Evet,sil!",
+                        cancelButtonText: "İptal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Silindi!",
+                                icon: "success"
+                            });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Event listeners for "Tamamlandı" buttons using the class
+            document.querySelectorAll('.complete-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    Swal.fire({
+                        title: "Emin misiniz?",
+                        text: "Bu işlem geri alınamaz!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Evet, tamamla!",
+                        cancelButtonText: "İptal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Tamamlandı!",
+                                text: "İşleminiz başarıyla tamamlandı.",
+                                icon: "success"
+                            });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}

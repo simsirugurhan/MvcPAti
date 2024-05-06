@@ -1,9 +1,7 @@
 ﻿using Patici.EDMX;
 using Patici.Manager;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Patici.Controllers
@@ -29,7 +27,27 @@ namespace Patici.Controllers
                 return View(model);
             }
 
+            ViewBag.Cins = new SelectList(IlanManager.GetCins().ToList(), "Id", "Ad");
+            ViewBag.IlanTur = new SelectList(IlanManager.GetIlanTurler().ToList(), "Id", "Ad");
+            ViewBag.Tur = new SelectList(IlanManager.GetHayvanTurler().ToList(), "Id", "Ad");
+            ViewBag.Yas = new SelectList(IlanManager.GetHayvanYas().ToList(), "Id", "Ad");
+
             return View(kulDetay);
+        }
+
+        public ActionResult ProfilAyar(Guid kulId)
+        {
+            if (Session["KullaniciId"] is null || kulId.ToString() != Session["KullaniciId"].ToString())
+            {
+                //Giriş Yapmamışsa veya kullanıcı bilgileri eşleşmiyorsa Giriş Yap Alanına Gönderildi
+                return RedirectToAction("Index", "Login");
+            }
+
+            var kulDetay = ProfilManager.ProfilGetir(kulId).Result;
+
+
+
+            return View();
         }
     }
 }

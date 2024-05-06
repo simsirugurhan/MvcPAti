@@ -63,7 +63,7 @@ namespace Patici.Controllers
                 FormsAuthentication.SignOut();
                 Session["KullaniciId"] = kul.Id;
                 //profil sayfasına at
-                return Redirect("/Home/Index");
+                return Redirect("/Profil/Index");
             }
 
             return View();

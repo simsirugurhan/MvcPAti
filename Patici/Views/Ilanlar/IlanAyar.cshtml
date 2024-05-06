@@ -1,0 +1,104 @@
+﻿@model Patici.EDMX.Ilan
+
+@{
+    ViewBag.Title = "İlan Ayar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            height: 57px;
+            padding: 4px 5px;
+        }
+    </style>
+}
+
+<header class="site-header d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center">
+                <h2 class="mb-0">İlan Ayarları </h2>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="contact-section section-padding pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <form action="/Ilanlar/IlanAyar" method="post" class="custom-form contact-form" role="form">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("IlanTur", (SelectList)ViewBag.Tur, " - Tür - ", new { @class = "select2 form-control" })
+                                <label for="IlanTur">İlan türü</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-floating mt-0">
+                                @Html.TextBoxFor(x => x.Hayvan.Ad, new { placeholder = "Evcil Hayvan İsmi", @class = "form-control", required = "required" })
+                                <label for="Hayvan.Ad">Evcil hayvanın ismi</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownListFor(x => x.Hayvan.HayvanTur.HayvanCin.Id, (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control" })
+                                <label for="Hayvan.HayvanTur.HayvanCin.Id">Cinsi</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownListFor(x => x.Hayvan.HayvanTur.Id, (SelectList)ViewBag.HayTur, " -Tür- ", new { @class = "select2 form-control" })
+                                <label for="Hayvan.HayvanTur.Id">Evcil Hayvan Türü</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.CheckBox("Tasma", false, new { type = "checkbox", @class = "form-control" })
+                                <label for="Tasma">Tasması var mı?</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("YasID", (SelectList)ViewBag.Yas, " -Yaş- ", new { @class = "select2 form-control" })
+                                <label for="YasID">Kaç yaşında</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group mb-4">
+                                <label for="ilanFoto">İlan Fotoğrafı</label>
+                                <input type="file" class="form-control-file" id="ilanFoto" name="IlanFotos" multiple>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <div class="form-floating">
+                                @Html.TextAreaFor(x => x.Hayvan.Aciklama, new { @class = "form-control", placeholder = "Hayvan için açıklama giriniz" })
+                                <label for="Hayvan.Aciklama">Bilgileri buraya yazabilirsiniz</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 ms-auto">
+                            <button type="submit" class="form-control">Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('.select2').select2({
+                allowClear: true
+            });
+        });
+    </script>
+}

@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Patici.EDMX.Otel>
 @{
     ViewBag.Title = "Oteller";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,6 @@
             <div class="col-lg-12 col-12 text-center">
                 <h2 class="mb-0">Oteller</h2>
             </div>
-
         </div>
     </div>
 </header>
@@ -31,9 +30,9 @@
     <div class="col-md-12 tab-wrap">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="#" class="search-property-1">
+                <form action="/Oteller/Index" method="post" class="search-property-1">
                     <div class="row no-gutters">
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-2 col-6">
                             <div class="p-4 border-0">
                                 <label for="locationSelect">Gidilecek yer</label>
                                 <div class="form-field">
@@ -41,23 +40,23 @@
                                 </div>
                             </div>
                         </div>
-                        @*<div class="col-md-2 col-6">
-                                <div class=" p-4">
-                                    <label for="arrivalDate">Giriş Tarihi</label>
-                                    <div class="form-field">
-                                        <input type="text" id="arrivalDate" class="form-control" placeholder="Tarih Seçiniz">
-                                    </div>
+                        <div class="col-md-2 col-6">
+                            <div class=" p-4">
+                                <label for="arrivalDate">Giriş Tarihi</label>
+                                <div class="form-field">
+                                    <input type="text" id="arrivalDate" class="form-control" name="girisTarih" placeholder="Tarih Seçiniz">
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
-                                <div class=" p-4">
-                                    <label for="departureDate">Çıkış Tarihi</label>
-                                    <div class="form-field">
-                                        <input type="text" id="departureDate" class="form-control" placeholder="Tarih Seçiniz">
-                                    </div>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <div class=" p-4">
+                                <label for="departureDate">Çıkış Tarihi</label>
+                                <div class="form-field">
+                                    <input type="text" id="departureDate" class="form-control" name="cikisTarih" placeholder="Tarih Seçiniz">
                                 </div>
-                            </div>*@
-                        <div class="col-md-3 col-6">
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-6">
                             <div class=" p-4">
                                 <label>Fiyat</label>
                                 <div class="form-field">
@@ -65,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-2 col-6">
                             <div class="p-4">
                                 <label>Cins</label>
                                 <div class="form-field">
@@ -73,10 +72,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-2 col-6">
                             <div class="p-5 w-100 border-0">
                                 <input type="submit" value="Ara" class=" form-control btn btn-primary">
                             </div>
@@ -90,224 +86,65 @@
 
 <section class="latest-podcast-section section-padding pb-0" id="section_2">
     <div class="container">
+        @if (ViewBag.Mesaj != null)
+        {
+            <h3 style="color:red;">@ViewBag.Mesaj</h3>
+        }
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-12 mt-3">
-                <div class="section-title-wrap mb-5">
-                    <h4 class="section-title">Bornova</h4>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-12">
-                        <div class="custom-block-icon-wrap">
-                            <div class="custom-block-image-wrap custom-block-image-detail-page">
-                                <img src="~/Content/images/podcast/dog-pensions-19.png"
-                                     class="custom-block-image img-fluid" alt="">
-                            </div>
-                        </div>
+            @foreach (var m in Model)
+            {
+                var galeri = Patici.Manager.OtelManager.GetOtelGaleri(m.Id);
+                <div class="col-lg-10 col-12 mt-3">
+                    <div class="section-title-wrap mb-5">
+                        <h4 class="section-title">@m.KullaniciDetay.Kullanici.Sehir.Ad</h4>
                     </div>
-                    <div class="col-lg-9 col-12">
-                        <div class="custom-block-info">
-                            <h2 class="m-0">Zen Pet Hotel</h2>
-                            <p> Patili dostlarımızı sevgiyle misafir ediyoruz</p>
-                            <p>Bize 7/24 ulaşabilirsiniz</p>
-                            <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
-                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
-                                    <p class="m-0">
-                                        Sevgi Yalın
-                                        <img src="~/Content/images/verified.png" class="verified-image img-fluid" alt="">
-                                        <strong>İşletme Sahibi</strong>
-                                    </p>
+                    <div class="row">
+                        <div class="col-lg-3 col-12">
+                            <div class="custom-block-icon-wrap">
+                                <div class="custom-block-image-wrap custom-block-image-detail-page">
+                                    <img src="@galeri.First().Foto"
+                                         class="custom-block-image img-fluid" alt="">
                                 </div>
-                                <ul class="social-icon ms-lg-auto ms-md-auto">
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-phone"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-map-fill"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-10 col-12">
-                <div class="section-title-wrap mb-5">
-                    <h4 class="section-title">Bornova</h4>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-12">
-                        <div class="custom-block-icon-wrap">
-                            <div class="custom-block-image-wrap custom-block-image-detail-page">
-                                <img src="~/Content/images/podcast/dog-pensions-19.png"
-                                     class="custom-block-image img-fluid" alt="">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-9 col-12">
-                        <div class="custom-block-info">
-                            <h2 class="mb-2">Zen Pet Hotel</h2>
-                            <p> Patili dostlarımızı sevgiyle misafir ediyoruz</p>
-                            <p>Bize 7/24 ulaşabilirsiniz</p>
-                            <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
-                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
-                                    <p>
-                                        Sevgi Yalın
-                                        <img src="~/Content/images/verified.png" class="verified-image img-fluid" alt="">
-                                        <strong>İşletme Sahibi</strong>
-                                    </p>
+                        <div class="col-lg-9 col-12">
+                            <div class="custom-block-info">
+                                <h2 class="m-0">@m.KullaniciDetay.AdSoyad</h2>
+                                <p>@m.KullaniciDetay.Aciklama</p>
+                                <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
+                                    <div class="d-flex mb-3 mb-lg-0 mb-md-0">
+                                        <p class="m-0">
+                                            @m.KullaniciDetay.Kullanici.AdSoyad
+                                            <img src="@m.KullaniciDetay.ProfilFoto" class="verified-image img-fluid" alt="">
+                                            <strong>İşletme Sahibi</strong>
+                                        </p>
+                                    </div>
+                                    <ul class="social-icon ms-lg-auto ms-md-auto">
+                                        <li class="social-icon-item">
+                                            <a href="@m.KullaniciDetay.Website" class="social-icon-link bi-globe2"></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a href="@m.KullaniciDetay.Facebook" class="social-icon-link bi-facebook"></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a href="@m.KullaniciDetay.Instagram" class="social-icon-link bi-instagram"></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a href="@m.KullaniciDetay.Twitter" class="social-icon-link bi-twitter-x"></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a href="https://wa.me/@m.KullaniciDetay.Kullanici.Telefon" class="social-icon-link bi-whatsapp"></a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="social-icon ms-lg-auto ms-md-auto">
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-phone"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-map-fill"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-10 col-12">
-                <div class="section-title-wrap mb-5">
-                    <h4 class="section-title">Bornova</h4>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-12">
-                        <div class="custom-block-icon-wrap">
-                            <div class="custom-block-image-wrap custom-block-image-detail-page">
-                                <img src="~/Content/images/podcast/dog-pensions-19.png"
-                                     class="custom-block-image img-fluid" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 col-12">
-                        <div class="custom-block-info">
-                            <h2 class="mb-2">Zen Pet Hotel</h2>
-                            <p> Patili dostlarımızı sevgiyle misafir ediyoruz</p>
-                            <p>Bize 7/24 ulaşabilirsiniz</p>
-                            <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
-                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
-                                    <p>
-                                        Sevgi Yalın
-                                        <img src="~/Content/images/verified.png" class="verified-image img-fluid" alt="">
-                                        <strong>İşletme Sahibi</strong>
-                                    </p>
-                                </div>
-                                <ul class="social-icon ms-lg-auto ms-md-auto">
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-phone"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-map-fill"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-10 col-12">
-                <div class="section-title-wrap mb-5">
-                    <h4 class="section-title">Bornova</h4>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-12">
-                        <div class="custom-block-icon-wrap">
-                            <div class="custom-block-image-wrap custom-block-image-detail-page">
-                                <img src="~/Content/images/podcast/dog-pensions-19.png"
-                                     class="custom-block-image img-fluid" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 col-12">
-                        <div class="custom-block-info">
-                            <h2 class="mb-2">Zen Pet Hotel</h2>
-                            <p> Patili dostlarımızı sevgiyle misafir ediyoruz</p>
-                            <p>Bize 7/24 ulaşabilirsiniz</p>
-                            <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
-                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
-                                    <p>
-                                        Sevgi Yalın
-                                        <img src="~/Content/images/verified.png" class="verified-image img-fluid" alt="">
-                                        <strong>İşletme Sahibi</strong>
-                                    </p>
-                                </div>
-                                <ul class="social-icon ms-lg-auto ms-md-auto">
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-phone"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-map-fill"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                    </li>
-                                </ul>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-10 col-12">
-                <div class="section-title-wrap mb-5">
-                    <h4 class="section-title">Bornova</h4>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-3 col-12">
-                        <div class="custom-block-icon-wrap">
-                            <div class="custom-block-image-wrap custom-block-image-detail-page">
-                                <img src="~/Content/images/podcast/dog-pensions-19.png"
-                                     class="custom-block-image img-fluid" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-12">
-                        <div class="custom-block-info">
-                            <h2 class="mb-2">Zen Pet Hotel</h2>
-                            <p> Patili dostlarımızı sevgiyle misafir ediyoruz</p>
-                            <p>Bize 7/24 ulaşabilirsiniz</p>
-                            <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
-                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
-                                    <p>
-                                        Sevgi Yalın
-                                        <img src="~/Content/images/verified.png" class="verified-image img-fluid" alt="">
-                                        <strong>İşletme Sahibi</strong>
-                                    </p>
-                                </div>
-                                <ul class="social-icon ms-lg-auto ms-md-auto">
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-phone"></a>
-                                    </li>
-
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-map-fill"></a>
-                                    </li>
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="d-block"></div>
+            }
+
+            @*<div class="d-block"></div>
             <div class="col-lg-4 col-12 mx-auto mb-4">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination pagination-lg justify-content-center mt-5">
@@ -330,39 +167,35 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div>*@
         </div>
     </div>
 </section>
 
 @section scripts{
-    @*  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <script>
-            flatpickr("#datepicker", {
-                // Options here
-                dateFormat: "Y-m-d", // Formats the date as Year-Month-Day
-            });
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/tr.min.js" integrity="sha512-qLRWFERtH7kkE1NSUE1aEssg9+kyBsnehWPckHBLAt7mlD+v2+GI+2S7yBP7O2aYmaJ2gUz/LQHCoBKw4zovgQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>
-            // Initialize the datepicker for Giriş Tarihi (Arrival Date)
-            var arrivalPicker = flatpickr("#arrivalDate", {
-                dateFormat: "Y-m-d",
-                locale: "tr",
-                minDate: "today",  // prevents selecting dates before today
-                onChange: function (selectedDates) {
-                    // Set the minimum date of departurePicker to the selected date of arrivalPicker
-                    departurePicker.set("minDate", selectedDates[0]);
-                }
-            });
-            // Initialize the datepicker for Çıkış Tarihi (Departure Date)
-            var departurePicker = flatpickr("#departureDate", {
-                dateFormat: "Y-m-d",
-                locale: "tr",
-                minDate: "today",  // prevents selecting dates before today
-            });
-        </script>*@
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#datepicker", {
+            dateFormat: "Y-m-d",
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/tr.min.js" integrity="sha512-qLRWFERtH7kkE1NSUE1aEssg9+kyBsnehWPckHBLAt7mlD+v2+GI+2S7yBP7O2aYmaJ2gUz/LQHCoBKw4zovgQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var arrivalPicker = flatpickr("#arrivalDate", {
+            dateFormat: "Y-m-d",
+            locale: "tr",
+            minDate: "today",
+            onChange: function (selectedDates) {
+                departurePicker.set("minDate", selectedDates[0]);
+            }
+        });
+        var departurePicker = flatpickr("#departureDate", {
+            dateFormat: "Y-m-d",
+            locale: "tr",
+            minDate: "today",
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>

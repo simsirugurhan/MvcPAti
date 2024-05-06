@@ -1,0 +1,111 @@
+﻿@model Patici.EDMX.Otel
+@{
+    ViewBag.Title = "Otel Ayar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            height: 57px;
+            padding: 4px 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+}
+
+<header class="site-header d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center">
+                <h2 class="mb-0">Otel Ayarları</h2>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="contact-section section-padding pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <form action="#" method="post" class="custom-form contact-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("CinsID", (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control", multiple = "multiple" })
+                                <label for="hotelTypeSelect">Hayvan Cinsi</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelNameSection">
+                            <div class="form-floating mt-0">
+                                @Html.TextBoxFor(x => x.KullaniciDetay.AdSoyad, new { type = "text", @class = "form-control", placeholder = "Otel Adı", required = "required" })
+                                <label for="KullaniciDetay.AdSoyad">Otel Adı</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                            <div class="form-floating mt-0">
+                                @Html.DropDownList("FiyatID", (SelectList)ViewBag.Fiyat, " -Fiyat- ", new { @class = "select2 form-control" })
+                                <label for="FiyatID">Fiyat Aralığı</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12 ">
+                            <div class="form-floating mt-0">
+                                <input type="text" id="datePicker" class="form-control">
+                                <label for="datePicker">Kapalı olduğunuz günleri seçin</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12" id="documentUploadSection">
+                            <div class="form-group mb-4">
+                                <label for="belge">Belge</label>
+                                <input type="file" class="form-control-file" id="belge" name="belge">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group mb-4">
+                                <label for="fotolar"> Otel Fotoğrafları</label>
+                                <input type="file" class="form-control-file" id="fotolar" name="otelFoto" multiple>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <div class="form-floating">
+                                @Html.TextAreaFor(x=>x.KullaniciDetay.Aciklama, new {placeholder = "Açıklama giriniz", @class = "form-control" })
+                                <label for="KullaniciDetay.Aciklama">Bilgileri buraya girebilirsiniz</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 ms-auto">
+                            <button type="submit" class="form-control">Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select2 pluginini başlat
+            $('.select2').select2({
+                allowClear: true
+            });
+        });
+    </script>
+    <!-- Flatpickr Scripts -->
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+    <script>
+        flatpickr("#datePicker", {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+           // defaultDate: ["2016-10-20", "2016-11-04"],
+            minDate: "today",
+            "locale": "tr"
+        });
+        flatpickr.l10ns.default.firstDayOfWeek = 1; // Start week on Monday
+    </script>
+}

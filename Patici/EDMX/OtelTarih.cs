@@ -12,18 +12,13 @@ namespace Patici.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class Ilan
+    public partial class OtelTarih
     {
         public System.Guid Id { get; set; }
-        public System.Guid TurID { get; set; }
-        public System.Guid HayvanID { get; set; }
-        public System.Guid KulDetayID { get; set; }
-        public System.DateTime Tarih { get; set; }
+        public System.Guid OtelID { get; set; }
+        public System.DateTime KapaliTarih { get; set; }
         public bool Sil { get; set; }
-        public bool Tamamlandi { get; set; }
     
-        public virtual Hayvan Hayvan { get; set; }
-        public virtual IlanTur IlanTur { get; set; }
-        public virtual KullaniciDetay KullaniciDetay { get; set; }
+        public virtual Otel Otel { get; set; }
     }
 }

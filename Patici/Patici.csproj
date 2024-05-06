@@ -194,6 +194,9 @@
     <Compile Include="EDMX\OtelGaleri.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\OtelTarih.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\OtelTur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -338,6 +341,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Upload\Ilanlar\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EDMX\Model1.edmx">
@@ -357,6 +361,9 @@
     <Content Include="Views\Profil\Index.cshtml" />
     <Content Include="Views\Ilanlar\IlanDetay.cshtml" />
     <Content Include="Views\Oteller\OtelDetay.cshtml" />
+    <Content Include="Views\Profil\ProfilAyar.cshtml" />
+    <Content Include="Views\Oteller\OtelAyar.cshtml" />
+    <Content Include="Views\Ilanlar\IlanAyar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

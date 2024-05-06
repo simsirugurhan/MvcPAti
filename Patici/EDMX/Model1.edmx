@@ -70,6 +70,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Ad" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sira" Type="int" Nullable="false" />
           <Property Name="Sil" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Ilan">
@@ -81,6 +82,7 @@
           <Property Name="HayvanID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="KulDetayID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="Tamamlandi" Type="bit" Nullable="false" />
           <Property Name="Sil" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="IlanTur">
@@ -124,6 +126,7 @@
           <Property Name="TurID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FiyatID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AdSoyad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProfilFoto" Type="nvarchar(max)" />
           <Property Name="Onay" Type="bit" />
           <Property Name="Belge" Type="nvarchar(max)" />
           <Property Name="Aciklama" Type="nvarchar(max)" />
@@ -160,6 +163,15 @@
           <Property Name="OtelID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Foto" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Sira" Type="int" />
+          <Property Name="Sil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtelTarih">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OtelID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KapaliTarih" Type="datetime" Nullable="false" />
           <Property Name="Sil" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OtelTur">
@@ -370,6 +382,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OtelTarih_Otel">
+          <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
+          <End Role="OtelTarih" Type="Self.OtelTarih" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelTarih">
+              <PropertyRef Name="OtelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OtelTur_HayvanTur">
           <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
           <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
@@ -410,6 +434,7 @@
           <EntitySet Name="KullaniciTur" EntityType="Self.KullaniciTur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Otel" EntityType="Self.Otel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtelGaleri" EntityType="Self.OtelGaleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtelTarih" EntityType="Self.OtelTarih" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtelTur" EntityType="Self.OtelTur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -472,6 +497,10 @@
           <AssociationSet Name="FK_OtelGaleri_Otel" Association="Self.FK_OtelGaleri_Otel">
             <End Role="Otel" EntitySet="Otel" />
             <End Role="OtelGaleri" EntitySet="OtelGaleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtelTarih_Otel" Association="Self.FK_OtelTarih_Otel">
+            <End Role="Otel" EntitySet="Otel" />
+            <End Role="OtelTarih" EntitySet="OtelTarih" />
           </AssociationSet>
           <AssociationSet Name="FK_OtelTur_HayvanTur" Association="Self.FK_OtelTur_HayvanTur">
             <End Role="HayvanTur" EntitySet="HayvanTur" />
@@ -564,6 +593,7 @@
           <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Sil" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Hayvans" Relationship="Self.FK_Hayvan_HayvanYas" FromRole="HayvanYas" ToRole="Hayvan" />
+          <Property Name="Sira" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Ilan">
           <Key>
@@ -578,6 +608,7 @@
           <NavigationProperty Name="Hayvan" Relationship="Self.FK_Ilan_Hayvan" FromRole="Ilan" ToRole="Hayvan" />
           <NavigationProperty Name="IlanTur" Relationship="Self.FK_Ilan_IlanTur" FromRole="Ilan" ToRole="IlanTur" />
           <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Ilan_KullaniciDetay" FromRole="Ilan" ToRole="KullaniciDetay" />
+          <Property Name="Tamamlandi" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="IlanTur">
           <Key>
@@ -639,6 +670,7 @@
           <NavigationProperty Name="Otels" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="KullaniciDetay" ToRole="Otel" />
           <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_KullaniciDetay" FromRole="KullaniciDetay" ToRole="OtelGaleri" />
           <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="KullaniciTur">
           <Key>
@@ -660,6 +692,7 @@
           <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="Otel" ToRole="KullaniciDetay" />
           <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_Otel" FromRole="Otel" ToRole="OtelGaleri" />
           <NavigationProperty Name="OtelTurs" Relationship="Self.FK_OtelTur_Otel" FromRole="Otel" ToRole="OtelTur" />
+          <NavigationProperty Name="OtelTarihs" Relationship="PatiDostuModel.FK_OtelTarih_Otel" FromRole="Otel" ToRole="OtelTarih" />
         </EntityType>
         <EntityType Name="OtelGaleri">
           <Key>
@@ -996,7 +1029,34 @@
             <End Role="Otel" EntitySet="Otels" />
             <End Role="OtelTur" EntitySet="OtelTurs" />
           </AssociationSet>
+          <EntitySet Name="OtelTarihs" EntityType="PatiDostuModel.OtelTarih" />
+          <AssociationSet Name="FK_OtelTarih_Otel" Association="PatiDostuModel.FK_OtelTarih_Otel">
+            <End Role="Otel" EntitySet="Otels" />
+            <End Role="OtelTarih" EntitySet="OtelTarihs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OtelTarih">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OtelID" Type="Guid" Nullable="false" />
+          <Property Name="KapaliTarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Otel" Relationship="PatiDostuModel.FK_OtelTarih_Otel" FromRole="OtelTarih" ToRole="Otel" />
+        </EntityType>
+        <Association Name="FK_OtelTarih_Otel">
+          <End Type="PatiDostuModel.Otel" Role="Otel" Multiplicity="1" />
+          <End Type="PatiDostuModel.OtelTarih" Role="OtelTarih" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtelTarih">
+              <PropertyRef Name="OtelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1071,6 +1131,7 @@
           <EntitySetMapping Name="HayvanYas">
             <EntityTypeMapping TypeName="PatiDostuModel.HayvanYa">
               <MappingFragment StoreEntitySet="HayvanYas">
+                <ScalarProperty Name="Sira" ColumnName="Sira" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Sil" ColumnName="Sil" />
@@ -1080,6 +1141,7 @@
           <EntitySetMapping Name="Ilans">
             <EntityTypeMapping TypeName="PatiDostuModel.Ilan">
               <MappingFragment StoreEntitySet="Ilan">
+                <ScalarProperty Name="Tamamlandi" ColumnName="Tamamlandi" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TurID" ColumnName="TurID" />
                 <ScalarProperty Name="HayvanID" ColumnName="HayvanID" />
@@ -1127,6 +1189,7 @@
           <EntitySetMapping Name="KullaniciDetays">
             <EntityTypeMapping TypeName="PatiDostuModel.KullaniciDetay">
               <MappingFragment StoreEntitySet="KullaniciDetay">
+                <ScalarProperty Name="ProfilFoto" ColumnName="ProfilFoto" />
                 <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="KulID" ColumnName="KulID" />
@@ -1203,6 +1266,16 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtelTarihs">
+            <EntityTypeMapping TypeName="PatiDostuModel.OtelTarih">
+              <MappingFragment StoreEntitySet="OtelTarih">
+                <ScalarProperty Name="Sil" ColumnName="Sil" />
+                <ScalarProperty Name="KapaliTarih" ColumnName="KapaliTarih" />
+                <ScalarProperty Name="OtelID" ColumnName="OtelID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

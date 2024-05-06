@@ -69,6 +69,7 @@
     <EntitySetMapping Name="HayvanYas">
       <EntityTypeMapping TypeName="PatiDostuModel.HayvanYa">
         <MappingFragment StoreEntitySet="HayvanYas">
+          <ScalarProperty Name="Sira" ColumnName="Sira" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ad" ColumnName="Ad" />
           <ScalarProperty Name="Sil" ColumnName="Sil" />
@@ -78,6 +79,7 @@
     <EntitySetMapping Name="Ilans">
       <EntityTypeMapping TypeName="PatiDostuModel.Ilan">
         <MappingFragment StoreEntitySet="Ilan">
+          <ScalarProperty Name="Tamamlandi" ColumnName="Tamamlandi" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TurID" ColumnName="TurID" />
           <ScalarProperty Name="HayvanID" ColumnName="HayvanID" />
@@ -125,6 +127,7 @@
     <EntitySetMapping Name="KullaniciDetays">
       <EntityTypeMapping TypeName="PatiDostuModel.KullaniciDetay">
         <MappingFragment StoreEntitySet="KullaniciDetay">
+          <ScalarProperty Name="ProfilFoto" ColumnName="ProfilFoto" />
           <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="KulID" ColumnName="KulID" />
@@ -201,6 +204,16 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OtelTarihs">
+      <EntityTypeMapping TypeName="PatiDostuModel.OtelTarih">
+        <MappingFragment StoreEntitySet="OtelTarih">
+          <ScalarProperty Name="Sil" ColumnName="Sil" />
+          <ScalarProperty Name="KapaliTarih" ColumnName="KapaliTarih" />
+          <ScalarProperty Name="OtelID" ColumnName="OtelID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -40,6 +40,8 @@
         <AssociationConnector Association="PatiDostuModel.FK_OtelGaleri_KullaniciDetay" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_OtelGaleri_Otel" ManuallyRouted="false" />
         <AssociationConnector Association="PatiDostuModel.FK_OtelTur_Otel" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PatiDostuModel.OtelTarih" Width="1.5" PointX="9.75" PointY="16" />
+        <AssociationConnector Association="PatiDostuModel.FK_OtelTarih_Otel" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

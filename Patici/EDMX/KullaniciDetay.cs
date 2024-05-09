@@ -26,18 +26,18 @@ namespace Patici.EDMX
         public System.Guid Id { get; set; }
         public System.Guid KulID { get; set; }
         public System.Guid TurID { get; set; }
-        public System.Guid FiyatID { get; set; }
+        public Nullable<System.Guid> FiyatID { get; set; }
         public string AdSoyad { get; set; }
+        public string ProfilFoto { get; set; }
         public Nullable<bool> Onay { get; set; }
         public string Belge { get; set; }
+        public string Aciklama { get; set; }
         public string Website { get; set; }
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Instagram { get; set; }
         public System.DateTime Tarih { get; set; }
         public bool Sil { get; set; }
-        public string Aciklama { get; set; }
-        public string ProfilFoto { get; set; }
     
         public virtual FiyatAraligi FiyatAraligi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

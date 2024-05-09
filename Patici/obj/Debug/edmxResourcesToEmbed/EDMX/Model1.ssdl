@@ -119,8 +119,8 @@
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="KulID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="TurID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FiyatID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AdSoyad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FiyatID" Type="uniqueidentifier" />
+    <Property Name="AdSoyad" Type="nvarchar(max)" />
     <Property Name="ProfilFoto" Type="nvarchar(max)" />
     <Property Name="Onay" Type="bit" />
     <Property Name="Belge" Type="nvarchar(max)" />
@@ -175,7 +175,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="OtelID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="HayTurID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HayCinsID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Sil" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Sehir">
@@ -306,7 +306,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_KullaniciDetay_FiyatAraligi">
-    <End Role="FiyatAraligi" Type="Self.FiyatAraligi" Multiplicity="1" />
+    <End Role="FiyatAraligi" Type="Self.FiyatAraligi" Multiplicity="0..1" />
     <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FiyatAraligi">
@@ -389,15 +389,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OtelTur_HayvanTur">
-    <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
+  <Association Name="FK_OtelTur_HayvanCins">
+    <End Role="HayvanCins" Type="Self.HayvanCins" Multiplicity="1" />
     <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HayvanTur">
+      <Principal Role="HayvanCins">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="OtelTur">
-        <PropertyRef Name="HayTurID" />
+        <PropertyRef Name="HayCinsID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -497,8 +497,8 @@
       <End Role="Otel" EntitySet="Otel" />
       <End Role="OtelTarih" EntitySet="OtelTarih" />
     </AssociationSet>
-    <AssociationSet Name="FK_OtelTur_HayvanTur" Association="Self.FK_OtelTur_HayvanTur">
-      <End Role="HayvanTur" EntitySet="HayvanTur" />
+    <AssociationSet Name="FK_OtelTur_HayvanCins" Association="Self.FK_OtelTur_HayvanCins">
+      <End Role="HayvanCins" EntitySet="HayvanCins" />
       <End Role="OtelTur" EntitySet="OtelTur" />
     </AssociationSet>
     <AssociationSet Name="FK_OtelTur_Otel" Association="Self.FK_OtelTur_Otel">

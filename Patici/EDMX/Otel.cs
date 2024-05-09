@@ -18,8 +18,8 @@ namespace Patici.EDMX
         public Otel()
         {
             this.OtelGaleris = new HashSet<OtelGaleri>();
-            this.OtelTurs = new HashSet<OtelTur>();
             this.OtelTarihs = new HashSet<OtelTarih>();
+            this.OtelTurs = new HashSet<OtelTur>();
         }
     
         public System.Guid Id { get; set; }
@@ -31,8 +31,8 @@ namespace Patici.EDMX
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtelGaleri> OtelGaleris { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OtelTur> OtelTurs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtelTarih> OtelTarihs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OtelTur> OtelTurs { get; set; }
     }
 }

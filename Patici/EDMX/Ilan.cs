@@ -19,8 +19,8 @@ namespace Patici.EDMX
         public System.Guid HayvanID { get; set; }
         public System.Guid KulDetayID { get; set; }
         public System.DateTime Tarih { get; set; }
-        public bool Sil { get; set; }
         public bool Tamamlandi { get; set; }
+        public bool Sil { get; set; }
     
         public virtual Hayvan Hayvan { get; set; }
         public virtual IlanTur IlanTur { get; set; }

@@ -37,6 +37,7 @@
     <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Sil" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="HayvanTurs" Relationship="Self.FK_HayvanTur_HayvanCins" FromRole="HayvanCins" ToRole="HayvanTur" />
+    <NavigationProperty Name="OtelTurs" Relationship="Self.FK_OtelTur_HayvanCins" FromRole="HayvanCins" ToRole="OtelTur" />
   </EntityType>
   <EntityType Name="HayvanCinsiyet">
     <Key>
@@ -68,7 +69,6 @@
     <Property Name="Sil" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Hayvans" Relationship="Self.FK_Hayvan_HayvanTur" FromRole="HayvanTur" ToRole="Hayvan" />
     <NavigationProperty Name="HayvanCin" Relationship="Self.FK_HayvanTur_HayvanCins" FromRole="HayvanTur" ToRole="HayvanCins" />
-    <NavigationProperty Name="OtelTurs" Relationship="Self.FK_OtelTur_HayvanTur" FromRole="HayvanTur" ToRole="OtelTur" />
   </EntityType>
   <EntityType Name="HayvanYa">
     <Key>
@@ -76,9 +76,9 @@
     </Key>
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sira" Type="Int32" Nullable="false" />
     <Property Name="Sil" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Hayvans" Relationship="Self.FK_Hayvan_HayvanYas" FromRole="HayvanYas" ToRole="Hayvan" />
-    <Property Name="Sira" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Ilan">
     <Key>
@@ -89,11 +89,11 @@
     <Property Name="HayvanID" Type="Guid" Nullable="false" />
     <Property Name="KulDetayID" Type="Guid" Nullable="false" />
     <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Tamamlandi" Type="Boolean" Nullable="false" />
     <Property Name="Sil" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Hayvan" Relationship="Self.FK_Ilan_Hayvan" FromRole="Ilan" ToRole="Hayvan" />
     <NavigationProperty Name="IlanTur" Relationship="Self.FK_Ilan_IlanTur" FromRole="Ilan" ToRole="IlanTur" />
     <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Ilan_KullaniciDetay" FromRole="Ilan" ToRole="KullaniciDetay" />
-    <Property Name="Tamamlandi" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="IlanTur">
     <Key>
@@ -137,10 +137,12 @@
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="KulID" Type="Guid" Nullable="false" />
     <Property Name="TurID" Type="Guid" Nullable="false" />
-    <Property Name="FiyatID" Type="Guid" Nullable="false" />
-    <Property Name="AdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FiyatID" Type="Guid" />
+    <Property Name="AdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfilFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Onay" Type="Boolean" />
     <Property Name="Belge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Twitter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -154,8 +156,6 @@
     <NavigationProperty Name="KullaniciTur" Relationship="Self.FK_KullaniciDetay_KullaniciTur" FromRole="KullaniciDetay" ToRole="KullaniciTur" />
     <NavigationProperty Name="Otels" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="KullaniciDetay" ToRole="Otel" />
     <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_KullaniciDetay" FromRole="KullaniciDetay" ToRole="OtelGaleri" />
-    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProfilFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="KullaniciTur">
     <Key>
@@ -176,8 +176,8 @@
     <Property Name="Sil" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_Otel_KullaniciDetay" FromRole="Otel" ToRole="KullaniciDetay" />
     <NavigationProperty Name="OtelGaleris" Relationship="Self.FK_OtelGaleri_Otel" FromRole="Otel" ToRole="OtelGaleri" />
+    <NavigationProperty Name="OtelTarihs" Relationship="Self.FK_OtelTarih_Otel" FromRole="Otel" ToRole="OtelTarih" />
     <NavigationProperty Name="OtelTurs" Relationship="Self.FK_OtelTur_Otel" FromRole="Otel" ToRole="OtelTur" />
-    <NavigationProperty Name="OtelTarihs" Relationship="PatiDostuModel.FK_OtelTarih_Otel" FromRole="Otel" ToRole="OtelTarih" />
   </EntityType>
   <EntityType Name="OtelGaleri">
     <Key>
@@ -192,15 +192,25 @@
     <NavigationProperty Name="KullaniciDetay" Relationship="Self.FK_OtelGaleri_KullaniciDetay" FromRole="OtelGaleri" ToRole="KullaniciDetay" />
     <NavigationProperty Name="Otel" Relationship="Self.FK_OtelGaleri_Otel" FromRole="OtelGaleri" ToRole="Otel" />
   </EntityType>
+  <EntityType Name="OtelTarih">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="OtelID" Type="Guid" Nullable="false" />
+    <Property Name="KapaliTarih" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Sil" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Otel" Relationship="Self.FK_OtelTarih_Otel" FromRole="OtelTarih" ToRole="Otel" />
+  </EntityType>
   <EntityType Name="OtelTur">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="OtelID" Type="Guid" Nullable="false" />
-    <Property Name="HayTurID" Type="Guid" Nullable="false" />
+    <Property Name="HayCinsID" Type="Guid" Nullable="false" />
     <Property Name="Sil" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="HayvanTur" Relationship="Self.FK_OtelTur_HayvanTur" FromRole="OtelTur" ToRole="HayvanTur" />
+    <NavigationProperty Name="HayvanCin" Relationship="Self.FK_OtelTur_HayvanCins" FromRole="OtelTur" ToRole="HayvanCins" />
     <NavigationProperty Name="Otel" Relationship="Self.FK_OtelTur_Otel" FromRole="OtelTur" ToRole="Otel" />
   </EntityType>
   <EntityType Name="Sehir">
@@ -224,7 +234,7 @@
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK_KullaniciDetay_FiyatAraligi">
-    <End Role="FiyatAraligi" Type="Self.FiyatAraligi" Multiplicity="1" />
+    <End Role="FiyatAraligi" Type="Self.FiyatAraligi" Multiplicity="0..1" />
     <End Role="KullaniciDetay" Type="Self.KullaniciDetay" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FiyatAraligi">
@@ -307,15 +317,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OtelTur_HayvanTur">
-    <End Role="HayvanTur" Type="Self.HayvanTur" Multiplicity="1" />
+  <Association Name="FK_OtelTur_HayvanCins">
+    <End Role="HayvanCins" Type="Self.HayvanCin" Multiplicity="1" />
     <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HayvanTur">
+      <Principal Role="HayvanCins">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="OtelTur">
-        <PropertyRef Name="HayTurID" />
+        <PropertyRef Name="HayCinsID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -415,6 +425,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_OtelTarih_Otel">
+    <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
+    <End Role="OtelTarih" Type="Self.OtelTarih" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Otel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtelTarih">
+        <PropertyRef Name="OtelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OtelTur_Otel">
     <End Role="Otel" Type="Self.Otel" Multiplicity="1" />
     <End Role="OtelTur" Type="Self.OtelTur" Multiplicity="*" />
@@ -443,6 +465,7 @@
     <EntitySet Name="KullaniciTurs" EntityType="Self.KullaniciTur" />
     <EntitySet Name="Otels" EntityType="Self.Otel" />
     <EntitySet Name="OtelGaleris" EntityType="Self.OtelGaleri" />
+    <EntitySet Name="OtelTarihs" EntityType="Self.OtelTarih" />
     <EntitySet Name="OtelTurs" EntityType="Self.OtelTur" />
     <EntitySet Name="Sehirs" EntityType="Self.Sehir" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -474,8 +497,8 @@
       <End Role="HayvanCins" EntitySet="HayvanCins" />
       <End Role="HayvanTur" EntitySet="HayvanTurs" />
     </AssociationSet>
-    <AssociationSet Name="FK_OtelTur_HayvanTur" Association="Self.FK_OtelTur_HayvanTur">
-      <End Role="HayvanTur" EntitySet="HayvanTurs" />
+    <AssociationSet Name="FK_OtelTur_HayvanCins" Association="Self.FK_OtelTur_HayvanCins">
+      <End Role="HayvanCins" EntitySet="HayvanCins" />
       <End Role="OtelTur" EntitySet="OtelTurs" />
     </AssociationSet>
     <AssociationSet Name="FK_Ilan_IlanTur" Association="Self.FK_Ilan_IlanTur">
@@ -510,36 +533,13 @@
       <End Role="Otel" EntitySet="Otels" />
       <End Role="OtelGaleri" EntitySet="OtelGaleris" />
     </AssociationSet>
+    <AssociationSet Name="FK_OtelTarih_Otel" Association="Self.FK_OtelTarih_Otel">
+      <End Role="Otel" EntitySet="Otels" />
+      <End Role="OtelTarih" EntitySet="OtelTarihs" />
+    </AssociationSet>
     <AssociationSet Name="FK_OtelTur_Otel" Association="Self.FK_OtelTur_Otel">
       <End Role="Otel" EntitySet="Otels" />
       <End Role="OtelTur" EntitySet="OtelTurs" />
     </AssociationSet>
-    <EntitySet Name="OtelTarihs" EntityType="PatiDostuModel.OtelTarih" />
-    <AssociationSet Name="FK_OtelTarih_Otel" Association="PatiDostuModel.FK_OtelTarih_Otel">
-      <End Role="Otel" EntitySet="Otels" />
-      <End Role="OtelTarih" EntitySet="OtelTarihs" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="OtelTarih">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="OtelID" Type="Guid" Nullable="false" />
-    <Property Name="KapaliTarih" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Sil" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Otel" Relationship="PatiDostuModel.FK_OtelTarih_Otel" FromRole="OtelTarih" ToRole="Otel" />
-  </EntityType>
-  <Association Name="FK_OtelTarih_Otel">
-    <End Type="PatiDostuModel.Otel" Role="Otel" Multiplicity="1" />
-    <End Type="PatiDostuModel.OtelTarih" Role="OtelTarih" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Otel">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtelTarih">
-        <PropertyRef Name="OtelID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

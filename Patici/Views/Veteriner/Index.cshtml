@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Patici.EDMX.KullaniciDetay>
 @{
     ViewBag.Title = "Veterinerlerimiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,7 +12,7 @@
             border-radius: 4px;
             height: 38px;
             padding: 4px 5px;
-            width:100%;
+            width: 100%;
         }
     </style>
 }
@@ -23,7 +23,6 @@
             <div class="col-lg-12 col-12 text-center">
                 <h2 class="mb-0">Veterinerlerimiz</h2>
             </div>
-
         </div>
     </div>
 </header>
@@ -32,7 +31,7 @@
     <div class="col-md-12 tab-wrap">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <form action="#" class="search-property-1">
+                <form action="/Veteriner/Index" method="post" class="search-property-1">
                     <div class="row no-gutters">
                         <div class="col-6">
                             <div class=" p-4 border-0">
@@ -56,159 +55,62 @@
 
 <section class="trending-podcast-section section-padding pt-0">
     <div class="container">
+        @if (ViewBag.Mesaj != null)
+        {
+            <h3 style="color:red;">@ViewBag.Mesaj</h3>
+        }
         <div class="row">
-            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-full">
-                    <div class="custom-block-image-wrap">
-                        <a href="detail-page.html">
-                            <img src="~/Content/images/staff-2.jpg" class="custom-block-image"
-                                 alt="">
-                        </a>
-                    </div>
-                    <div class="custom-block-info">
-                        <h5 class="mb-2">
-                            <a href="detail-page.html">
-                                Ahmet mehmet
-                            </a>
-                        </h5>
-                        <p class="mb-0" style="font-size: 16px; line-height: 1.5;height: 72px; overflow: hidden;">um dolor sit amet consectetur Lorem Ipsum dolor sit amet consectetur zdsad asdasds adasdasd asdasdasdasdszdsadasdasdsadasdasdasdasdasdasdszdsadasdasdsadasdasdasdasdasdasdszdsadasdasdsadasdasdasdasdasdasdszdsadasdasdsadasdasdasdasdasdasds</p>
-                        <div class="custom-block-bottom d-flex justify-content-center mt-3">
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-whatsapp"></i>
-                            </a>
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-chat"></i>
-                            </a>
+            @foreach (var v in Model)
+            {
+                <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                    <div class="custom-block custom-block-full">
+                        <div class="custom-block-image-wrap">
+                            <img src="@v.ProfilFoto" class="custom-block-image" alt="">
+                        </div>
+                        <div class="custom-block-info">
+                            <h5 class="mb-2">
+                                
+                                    @v.Kullanici.AdSoyad
+                                
+                            </h5>
+                            <div class="custom-block-bottom d-flex justify-content-center mt-3">
+                                <a href="https://wa.me/@v.Kullanici.Telefon" class="badge ms-3">
+                                    <i class="bi-whatsapp"></i>
+                                </a>
+                                <a href="tel:@v.Kullanici.Telefon" class="badge ms-3">
+                                    <i class="bi-chat"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-full">
-                    <div class="custom-block-image-wrap">
-                        <a href="detail-page.html">
-                            <img src="~/Content/images/staff-2.jpg" class="custom-block-image img-fluid"
-                                 alt="">
-                        </a>
-                    </div>
-                    <div class="custom-block-info">
-                        <h5 class="mb-2">
-                            <a href="detail-page.html">
-                                Emel Sevgi
-                            </a>
-                        </h5>
-                        <p class="mb-0"> dolor sit amet consectetur Lorem Ipsum dolor sit amet consectetur</p>
-                        <div class="custom-block-bottom d-flex justify-content-center mt-3">
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-whatsapp"></i>
-                            </a>
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-chat"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-full">
-                    <div class="custom-block-image-wrap">
-                        <a href="detail-page.html">
-                            <img src="~/Content/images/staff-2.jpg" class="custom-block-image img-fluid"
-                                 alt="">
-                        </a>
-                    </div>
-                    <div class="custom-block-info">
-                        <h5 class="mb-2">
-                            <a href="detail-page.html">
-                                Fırat Nehir
-                            </a>
-                        </h5>
-                        <p class="mb-0">t consectetur Lorem Ipsum dolor sit amet consectetur</p>
-                        <div class="custom-block-bottom d-flex justify-content-center mt-3">
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-whatsapp"></i>
-                            </a>
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-chat"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-full">
-                    <div class="custom-block-image-wrap">
-                        <a href="detail-page.html">
-                            <img src="~/Content/images/staff-2.jpg" class="custom-block-image img-fluid"
-                                 alt="">
-                        </a>
-                    </div>
-                    <div class="custom-block-info">
-                        <h5 class="mb-2">
-                            <a href="detail-page.html">
-                                Yasin Kaplan
-                            </a>
-                        </h5>
-                        <p class="mb-0">Ltur Lorem Ipsum dolor sit amet consectetur Lorem Ipsum dolor sit amet consectetur</p>
-                        <div class="custom-block-bottom d-flex justify-content-center mt-3">
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-whatsapp"></i>
-                            </a>
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-chat"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-full">
-                    <div class="custom-block-image-wrap">
-                        <a href="detail-page.html">
-                            <img src="~/Content/images/staff-2.jpg" class="custom-block-image img-fluid"
-                                 alt="">
-                        </a>
-                    </div>
-                    <div class="custom-block-info">
-                        <h5 class="mb-2">
-                            Can Savaş
-                        </h5>
-                        <p class="mb-0">Lorem Ipsum dolor sit amet consecteor sit amet consectetur</p>
-                        <div class="custom-block-bottom d-flex justify-content-center mt-3">
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-whatsapp"></i>
-                            </a>
-                            <a href="#" class="badge ms-3">
-                                <i class="bi-chat"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-block"></div>
-            <div class="col-lg-4 col-12 mx-auto mb-4">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg justify-content-center mt-5">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
+            }
 
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
 
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+            @*<div class="d-block"></div>
+                <div class="col-lg-4 col-12 mx-auto mb-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-lg justify-content-center mt-5">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
 
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
 
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>*@
         </div>
     </div>
 </section>

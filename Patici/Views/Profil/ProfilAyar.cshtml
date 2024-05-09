@@ -29,7 +29,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-12 mx-auto">
-                <form action="#" method="post" class="custom-form contact-form" role="form">
+                <form action="/Profil/ProfilAyar" method="post" class="custom-form contact-form" role="form" enctype="multipart/form-data">
+                    @Html.HiddenFor(x => x.Id)
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating mt-0">
@@ -52,19 +53,12 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating mt-0">
                                 @Html.DropDownListFor(s => s.SehirID, (SelectList)ViewBag.Sehir, Model.Sehir.Ad, new { @class = "select2 form-control", required = "required" })
-                                <label for="SehirID">Konum</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="form-floating mt-0">
-                                @Html.TextBoxFor(x => x.Parola, new { type = "password", @class = "form-control", placeholder = "******", required = "required" })
-                                <label for="Parola">Parola</label>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group mb-4">
-                                <label for="exampleFormControlFile1">Profil Fotoğrafı</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="profilFoto">
+                                <label for="profilFoto">Profil Fotoğrafı</label>
+                                <input type="file" class="form-control-file" id="profilFoto" name="profilFoto">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12 ms-auto pt-3">

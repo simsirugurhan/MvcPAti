@@ -61,6 +61,9 @@
                                     @Html.DropDownListFor(s => s.SehirID, (SelectList)ViewBag.Sehir, " -Konum- ", new { @class = "select2 form-control", required = "required" })
                                 </div>
                                 <div class="form-label-group">
+                                    @Html.DropDownList("TurID", (SelectList)ViewBag.Tur, " -Tür- ", new { @class = "select2 form-control", required = "required" })
+                                </div>
+                                <div class="form-label-group">
                                     @Html.TextBoxFor(x => x.Email, new { type = "email", @class = "form-control", placeholder = "Email adresi", required = "required" })
                                     <label for="Email">Email Adresi</label>
                                 </div>

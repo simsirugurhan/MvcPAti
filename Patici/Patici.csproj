@@ -215,6 +215,7 @@
     <Compile Include="Manager\OtelManager.cs" />
     <Compile Include="Manager\ProfilManager.cs" />
     <Compile Include="Manager\SifreCrypto.cs" />
+    <Compile Include="Manager\VeterinerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -341,7 +342,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Upload\Belge\" />
     <Folder Include="Upload\Ilanlar\" />
+    <Folder Include="Upload\Oteller\" />
+    <Folder Include="Upload\Profil\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EDMX\Model1.edmx">

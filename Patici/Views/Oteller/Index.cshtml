@@ -94,22 +94,33 @@
             @foreach (var m in Model)
             {
                 var galeri = Patici.Manager.OtelManager.GetOtelGaleri(m.Id);
+
                 <div class="col-lg-10 col-12 mt-3">
                     <div class="section-title-wrap mb-5">
-                        <h4 class="section-title">@m.KullaniciDetay.Kullanici.Sehir.Ad</h4>
+                        <h4 class="section-title">
+                            <a href="@Url.Action("OtelDetay","Oteller", new {otelId = m.Id})">
+                                @m.KullaniciDetay.Kullanici.Sehir.Ad
+                            </a>
+                        </h4>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-12">
                             <div class="custom-block-icon-wrap">
                                 <div class="custom-block-image-wrap custom-block-image-detail-page">
-                                    <img src="@galeri.First().Foto"
-                                         class="custom-block-image img-fluid" alt="">
+                                    <a href="@Url.Action("OtelDetay","Oteller", new {otelId = m.Id})">
+                                        <img src="@galeri.First().Foto"
+                                             class="custom-block-image img-fluid" alt="">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-9 col-12">
                             <div class="custom-block-info">
-                                <h2 class="m-0">@m.KullaniciDetay.AdSoyad</h2>
+                                <h2 class="m-0">
+                                    <a href="@Url.Action("OtelDetay","Oteller", new {otelId = m.Id})">
+                                        @m.KullaniciDetay.AdSoyad
+                                    </a>
+                                </h2>
                                 <p>@m.KullaniciDetay.Aciklama</p>
                                 <div class="profile-block profile-detail-block d-flex flex-wrap align-items-center mt-5">
                                     <div class="d-flex mb-3 mb-lg-0 mb-md-0">
@@ -130,44 +141,44 @@
                                             <a href="@m.KullaniciDetay.Instagram" class="social-icon-link bi-instagram"></a>
                                         </li>
                                         <li class="social-icon-item">
-                                            <a href="@m.KullaniciDetay.Twitter" class="social-icon-link bi-twitter-x"></a>
+                                            <a href="@m.KullaniciDetay.Twitter" class="social-icon-link bi-twitter"></a>
                                         </li>
                                         <li class="social-icon-item">
                                             <a href="https://wa.me/@m.KullaniciDetay.Kullanici.Telefon" class="social-icon-link bi-whatsapp"></a>
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
+
             }
 
             @*<div class="d-block"></div>
-            <div class="col-lg-4 col-12 mx-auto mb-4">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg justify-content-center mt-5">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
+                <div class="col-lg-4 col-12 mx-auto mb-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-lg justify-content-center mt-5">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
 
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
 
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
 
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
 
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>*@
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>*@
         </div>
     </div>
 </section>

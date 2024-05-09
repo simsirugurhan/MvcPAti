@@ -16,10 +16,10 @@ namespace Patici.EDMX
     {
         public System.Guid Id { get; set; }
         public System.Guid OtelID { get; set; }
-        public System.Guid HayTurID { get; set; }
+        public System.Guid HayCinsID { get; set; }
         public bool Sil { get; set; }
     
-        public virtual HayvanTur HayvanTur { get; set; }
+        public virtual HayvanCin HayvanCin { get; set; }
         public virtual Otel Otel { get; set; }
     }
 }

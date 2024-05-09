@@ -31,13 +31,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-12 mx-auto">
-                <form action="/Ilanlar/IlanAyar" method="post" class="custom-form contact-form" role="form">
+                <form action="/Ilanlar/IlanAyar" method="post" class="custom-form contact-form" role="form" enctype="multipart/form-data">
                     @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x=>x.HayvanID)
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
                             <div class="form-floating mt-0">
-                                @Html.DropDownList("IlanTur", (SelectList)ViewBag.Tur, " - Tür - ", new { @class = "select2 form-control" })
-                                <label for="IlanTur">İlan türü</label>
+                                @Html.DropDownListFor(x => x.TurID, (SelectList)ViewBag.Tur, " - Tür - ", new { @class = "select2 form-control" })
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
@@ -46,28 +46,21 @@
                                 <label for="Hayvan.Ad">Evcil hayvanın ismi</label>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
-                            <div class="form-floating mt-0">
-                                @Html.DropDownListFor(x => x.Hayvan.HayvanTur.HayvanCin.Id, (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control" })
-                                <label for="Hayvan.HayvanTur.HayvanCin.Id">Cinsi</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                        <div class="col-lg-6 col-md-6 col-12" style="margin-bottom:24px;">
                             <div class="form-floating mt-0">
                                 @Html.DropDownListFor(x => x.Hayvan.HayvanTur.Id, (SelectList)ViewBag.HayTur, " -Tür- ", new { @class = "select2 form-control" })
-                                <label for="Hayvan.HayvanTur.Id">Evcil Hayvan Türü</label>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                        <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating mt-0">
-                                @Html.CheckBox("Tasma", false, new { type = "checkbox", @class = "form-control" })
-                                <label for="Tasma">Tasması var mı?</label>
+                                @Html.CheckBoxFor(x => x.Hayvan.Tasma)
+                                <label style="padding:0; padding-left:20px;" for="Tasma">Tasması var mı?</label>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
+                        <div class="col-lg-6 col-md-6 col-12" style="margin-bottom:24px;">
                             <div class="form-floating mt-0">
-                                @Html.DropDownList("YasID", (SelectList)ViewBag.Yas, " -Yaş- ", new { @class = "select2 form-control" })
-                                <label for="YasID">Kaç yaşında</label>
+                                @Html.DropDownListFor(x => x.Hayvan.YasID, (SelectList)ViewBag.Yas, " -Yaş- ", new { @class = "select2 form-control" })
+
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">

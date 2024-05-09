@@ -1,7 +1,9 @@
 ﻿using Patici.EDMX;
 using Patici.Manager;
 using System;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Patici.Controllers
@@ -22,7 +24,14 @@ namespace Patici.Controllers
 
             if (kulDetay is null)
             {
+                var kul = ProfilManager.GetKullanici(kullaniciId);
                 var model = new KullaniciDetay();
+                model.Kullanici = kul;
+
+                ViewBag.Cins = new SelectList(IlanManager.GetCins().ToList(), "Id", "Ad");
+                ViewBag.IlanTur = new SelectList(IlanManager.GetIlanTurler().ToList(), "Id", "Ad");
+                ViewBag.Tur = new SelectList(IlanManager.GetHayvanTurler().ToList(), "Id", "Ad");
+                ViewBag.Yas = new SelectList(IlanManager.GetHayvanYas().ToList(), "Id", "Ad");
 
                 return View(model);
             }
@@ -45,9 +54,37 @@ namespace Patici.Controllers
 
             var kulDetay = ProfilManager.ProfilGetir(kulId).Result;
 
+            ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
 
+            if (kulDetay is null)
+            {
+                var kul = ProfilManager.GetKullanici(kulId);
+                return View(kul);
+            }
 
-            return View();
+            return View(kulDetay.Kullanici);
+        }
+
+        [HttpPost]
+        public ActionResult ProfilAyar(Kullanici model, HttpPostedFileBase profilFoto)
+        {
+            var kullanici = ProfilManager.PostProfil(model);
+            var kulDetay = ProfilManager.ProfilGetir(kullanici.Id).Result;
+
+            if (profilFoto != null)
+            {
+                var fotoformat = Path.GetExtension(profilFoto.FileName);
+                var fotoad = Guid.NewGuid() + fotoformat;
+                var fotoyol = Path.Combine(Server.MapPath("/Upload/Profil/" + fotoad));
+                profilFoto.SaveAs(fotoyol);
+                var yol = "/Upload/Profil/" + fotoad;
+
+                ProfilManager.PostProfilFoto(kulDetay.Id, yol);
+            }
+
+            ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
+
+            return RedirectToAction("Index","Profil");
         }
     }
 }

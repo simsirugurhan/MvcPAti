@@ -15,10 +15,11 @@
                     <div class="text-center mb-5 pb-2">
                         <h1 class="text-white">Kayıp İlanları</h1>
                     </div>
-                    @foreach (var i in ilanlar)
-                    {
-                        var galeri = Patici.Manager.IlanManager.GetHayvanGaleriFromIlan(i.Id);
-                        <div class="owl-carousel owl-theme">
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var i in ilanlar)
+                        {
+                            var galeri = Patici.Manager.IlanManager.GetHayvanGaleriFromIlan(i.Id);
+
                             <div class="owl-carousel-info-wrap item">
                                 <img src="@galeri.First().Foto" class="owl-carousel-image img-fluid">
                                 <div class="owl-carousel-info">
@@ -29,8 +30,8 @@
                                     <span class="badge">@i.KullaniciDetay.Kullanici.Telefon</span>
                                 </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>

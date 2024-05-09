@@ -74,8 +74,11 @@
                         <strong class="d-inline me-4">Konum:</strong>
                         <span>@Model.Kullanici.Sehir.Ad</span>
                     </p>
-                    <a href="@Url.Action("ProfilAyar","Profil", new {kulId = Model.KulID})">
+                    <a href="@Url.Action("ProfilAyar","Profil", new {kulId = Model.Kullanici.Id})">
                         <button>Düzenle</button>
+                    </a>
+                    <a href="@Url.Action("CikisYap","Login")">
+                        <button style="background-color:indianred">Çıkış Yap</button>
                     </a>
                 </div>
             </div>
@@ -118,11 +121,11 @@
                             {
                                 if (g.Sira == 1)
                                 {
-                                    <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira" class="active"></button>
+                                    <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="@g.Sira" class="active"></button>
                                 }
                                 else
                                 {
-                                    <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira"></button>
+                                    <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="@g.Sira"></button>
                                 }
                             }
                         </div>
@@ -145,26 +148,46 @@
                             }
                         </div>
                         <!-- Left and right controls/icons -->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon"></span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
                             <span class="carousel-control-next-icon"></span>
                         </button>
                     </div>
                 </div>
                 @{
                     var otel = Patici.Manager.OtelManager.GetOtelFromKulDetay(Model.Id);
-                    var otelTur = Patici.Manager.OtelManager.GetOtelTur(otel.Id);
+                    string otelTur = "";
+                    if (otel != null)
+                    {
+                        otelTur = Patici.Manager.OtelManager.GetOtelTur(otel.Id);
+                    }
+
                 }
                 <div class="col-lg-5 col-12 pe-lg-5">
                     <div class="contact-info">
-                        <h3 class="mb-1">@Model.AdSoyad</h3>
+                        <h3 class="mb-1">
+                            @{
+                                var ad = Model.AdSoyad != null ? Model.AdSoyad : "";
+                            }
+                            @ad
+                        </h3>
                         <h5 class="mb-4">@otelTur</h5>
-                        <p>@Model.Aciklama</p>
+                        <p>
+                            @{
+                                var aciklama = Model.Aciklama != null ? Model.Aciklama : "";
+                            }
+                            @aciklama
+                        </p>
                         <p class="d-flex border-bottom pb-3 mb-4">
                             <strong class="d-inline me-4">Fiyat:</strong>
-                            <span>@Model.FiyatAraligi.Ad</span>
+                            <span>
+                                @{
+                                    var fiyat = Model.FiyatID != null ? Model.FiyatAraligi.Ad : "";
+                                }
+                                @fiyat
+                            </span>
                         </p>
                         <p class="d-flex border-bottom pb-3 mb-4">
                             <strong class="d-inline me-4">Sahip:</strong>
@@ -178,10 +201,14 @@
                             <strong class="d-inline me-4">Konum:</strong>
                             <span>@Model.Kullanici.Sehir.Ad</span>
                         </p>
-                        <a href="@Url.Action("OtelAyar","Oteller",new {otelId = otel.Id})">
-                            <button>Düzenle</button>
-                        </a>
-                        <button style="background-color: red;">Sil</button>
+                        @if (otel != null)
+                        {
+                            <a href="@Url.Action("OtelAyar","Oteller",new {otelId = otel.Id})">
+                                <button>Düzenle</button>
+                            </a>
+                            <button style="background-color: red;" id="otelSil" data-id="@otel.Id">Sil</button>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -207,7 +234,7 @@
         </div>
     </section>
 
-    @foreach (var i in ilanlar)
+    foreach (var i in ilanlar)
     {
         <section class="section-padding" id="section_2">
             <div class="container">
@@ -222,20 +249,24 @@
                             <div class="carousel-indicators">
                                 @foreach (var g in galeri)
                                 {
+
                                     if (g.Sira == 1)
                                     {
-                                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira" class="active"></button>
+                                        <button type="button" data-bs-target="#adsCarousel" data-bs-slide-to="@g.Sira" class="active"></button>
                                     }
                                     else
                                     {
-                                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="@g.Sira"></button>
+                                        <button type="button" data-bs-target="#adsCarousel" data-bs-slide-to="@g.Sira"></button>
                                     }
+
+
                                 }
                             </div>
                             <!-- The slideshow/carousel -->
                             <div class="carousel-inner">
                                 @foreach (var g in galeri)
                                 {
+
                                     if (g.Sira == 1)
                                     {
                                         <div class="carousel-item active">
@@ -248,13 +279,14 @@
                                             <img src="@g.Foto" class="d-block w-100">
                                         </div>
                                     }
+
                                 }
                             </div>
                             <!-- Left and right controls/icons -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#adsCarousel" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon"></span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#adsCarousel" data-bs-slide="next">
                                 <span class="carousel-control-next-icon"></span>
                             </button>
                         </div>
@@ -289,11 +321,21 @@
                                 <strong class="d-inline me-4">Konum:</strong>
                                 <span>@i.KullaniciDetay.Kullanici.Sehir.Ad</span>
                             </p>
-                            <a href="@Url.Action("IlanAyar","Ilanlar",new {ilanId = i.Id})">
-                                <button>Düzenle</button>
-                            </a>
-                            <button class="complete-button">Tamamlandı</button>
-                            <button style="background-color: red;">Sil</button>
+
+                            @if (!i.Tamamlandi)
+                            {
+                                <a href="@Url.Action("IlanAyar","Ilanlar",new {ilanId = i.Id})">
+                                    <button>Düzenle</button>
+                                </a>
+                                <button class="complete-button" id="ilanTamam" data-id="@i.Id">Tamamla</button>
+                                <button style="background-color: red;" id="ilanSil" data-id="@i.Id">Sil</button>
+                            }
+                            else
+                            {
+                                <button class="complete-button" disabled>Bu İlan Tamamlandı</button>
+                            }
+
+
                         </div>
                     </div>
                 </div>
@@ -309,54 +351,40 @@
                 <div class="section-title-wrap mb-5">
                     <h4 class="section-title">İlan ver</h4>
                 </div>
-                <form action="#" method="post" class="custom-form contact-form" role="form">
+                <form action="/Ilanlar/IlanEkle" method="post" class="custom-form contact-form" role="form" enctype="multipart/form-data">
+                    @Html.Hidden("KulDetayID", Model.Id)
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating mt-0">
                                 @Html.DropDownList("IlanTur", (SelectList)ViewBag.IlanTur, " - Tür - ", new { @class = "select2 form-control" })
-                                <label for="IlanTur">İlan Tür</label>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
-                                @Html.TextBox("HayvanAd", new { type = "text", @class = "form-control", placeholder = "Hayvan Adı", required = "required" })
+                                @Html.TextBox("HayvanAd", "", new { @class = "form-control", placeholder = "Hayvan Adı", required = "required" })
                                 <label for="HayvanAd">Evcil Hayvanın İsmi</label>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-12" style="margin-bottom:24px;">
                             <div class="form-floating mt-0">
-                                @Html.DropDownList("CinsID", (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control" })
-                                <label for="CinID">Cinsi</label>
+                                @Html.DropDownList("TurID", (SelectList)ViewBag.Tur, " -Cins- ", new { @class = "select2 form-control", style = "margin-bottom:24px;" })
                             </div>
                         </div>
-
-                        @*BURASI DAHA SONRA KÖPEK VEYA KEDİ GÖRE GETİRİLECEK*@
-
-
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-12" style="margin-bottom:24px;">
                             <div class="form-floating mt-0">
-                                @Html.DropDownList("TurID", (SelectList)ViewBag.Tur, " -Cins- ", new { @class = "select2 form-control" })
-                                <label for="TurID">Türü</label>
+                                @Html.CheckBox("Tasma", false)
+                                <label style="padding:0; padding-left:20px;" for="tasmaci">Tasması var mı?</label>
                             </div>
                         </div>
-
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="form-floating mt-0">
-                                @Html.CheckBox("Tasma", false, new { type = "checkbox", @class = "form-control" })
-                                <label for="Tasma">Tasması var mı?</label>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-12" style="margin-bottom:24px;">
                             <div class="form-floating mt-0">
                                 @Html.DropDownList("YasID", (SelectList)ViewBag.Yas, " -Yaş- ", new { @class = "select2 form-control" })
-                                <label for="YasID">Kaç yaşında</label>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group">
-                                <label for="exampleFormControlFile1">Fotoğraf</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="hayvanFotos" multiple>
+                                <label for="foto">Fotoğraf</label>
+                                <input type="file" class="form-control-file" id="foto" name="hayvanFotos" multiple>
                             </div>
                         </div>
                         <div class="col-lg-12 col-12">
@@ -377,21 +405,19 @@
 
 @section scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            $('.select2').select2({
-                allowClear: true
-            });
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Existing JavaScript code ...
+    @if (Model.TurID == Guid.Parse("8a88dc29-2854-4193-a1c1-f08d602ced0c"))
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var myCarousel = document.querySelector('#adsCarousel');
+                var carousel = new bootstrap.Carousel(myCarousel);
+            });
 
-            // Event listeners for delete buttons
-            document.querySelectorAll('button[style="background-color: red;"]').forEach(button => {
-                button.addEventListener('click', function () {
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('otelSil').addEventListener('click', function () {
+                    var otelId = this.getAttribute('data-id');
+
                     Swal.fire({
                         title: "Emin misin?",
                         text: "Bu işlem geri alınamaz!",
@@ -399,43 +425,159 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Evet,sil!",
+                        confirmButtonText: "Evet, sil!",
                         cancelButtonText: "İptal"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            Swal.fire({
-                                title: "Silindi!",
-                                icon: "success"
-                            });
+                            var url = "/Oteller/OtelSil?otelId=" + otelId;
+
+                            // GET isteği gönderme
+                            fetch(url, {
+                                method: 'GET'
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        // Başarıyla silindiğini bildir
+                                        Swal.fire({
+                                            title: "Silindi!",
+                                            icon: "success"
+                                        });
+
+                                        // 1 saniye sonra sayfayı yenile
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 1000);
+                                    } else {
+                                        // Hata durumunda uygun bir mesaj göster
+                                        Swal.fire({
+                                            title: "Hata!",
+                                            text: "Silme işlemi sırasında bir hata oluştu.",
+                                            icon: "error"
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('İstek hatası:', error);
+                                    // Hata durumunda uygun bir mesaj göster
+                                    Swal.fire({
+                                        title: "Hata!",
+                                        text: "Silme işlemi sırasında bir hata oluştu.",
+                                        icon: "error"
+                                    });
+                                });
                         }
                     });
                 });
             });
-        });
-    </script>
+        </script>
+    }
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Event listeners for "Tamamlandı" buttons using the class
-            document.querySelectorAll('.complete-button').forEach(button => {
-                button.addEventListener('click', function () {
-                    Swal.fire({
-                        title: "Emin misiniz?",
-                        text: "Bu işlem geri alınamaz!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Evet, tamamla!",
-                        cancelButtonText: "İptal"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire({
-                                title: "Tamamlandı!",
-                                text: "İşleminiz başarıyla tamamlandı.",
-                                icon: "success"
+            document.getElementById('ilanSil').addEventListener('click', function () {
+                var ilanId = this.getAttribute('data-id');
+
+                Swal.fire({
+                    title: "Emin misin?",
+                    text: "Bu işlem geri alınamaz!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Evet, sil!",
+                    cancelButtonText: "İptal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var url = "/Ilanlar/IlanSil?ilanId=" + ilanId;
+
+                        // GET isteği gönderme
+                        fetch(url, {
+                            method: 'GET'
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Başarıyla silindiğini bildir
+                                    Swal.fire({
+                                        title: "Silindi!",
+                                        icon: "success"
+                                    });
+
+                                    // 1 saniye sonra sayfayı yenile
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
+                                } else {
+                                    // Hata durumunda uygun bir mesaj göster
+                                    Swal.fire({
+                                        title: "Hata!",
+                                        text: "Silme işlemi sırasında bir hata oluştu.",
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('İstek hatası:', error);
+                                // Hata durumunda uygun bir mesaj göster
+                                Swal.fire({
+                                    title: "Hata!",
+                                    text: "Silme işlemi sırasında bir hata oluştu.",
+                                    icon: "error"
+                                });
                             });
-                        }
-                    });
+                    }
+                });
+            });
+
+            //ilan tamamla
+            document.getElementById('ilanTamam').addEventListener('click', function () {
+                const ilanId = this.getAttribute('data-id');
+                Swal.fire({
+                    title: "Emin misin?",
+                    text: "Bu işlem geri alınamaz!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Evet, Tamamla!",
+                    cancelButtonText: "İptal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var url = "/Ilanlar/IlanTamamla?ilanId=" + ilanId;
+
+                        // GET isteği gönderme
+                        fetch(url, {
+                            method: 'GET'
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Başarıyla tamamlandığında bildir
+                                    Swal.fire({
+                                        title: "Tamamlandı!",
+                                        icon: "success"
+                                    });
+
+                                    // 1 saniye sonra sayfayı yenile
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
+                                } else {
+                                    // Hata durumunda uygun bir mesaj göster
+                                    Swal.fire({
+                                        title: "Hata!",
+                                        text: "Tamamlama işlemi sırasında bir hata oluştu.",
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('İstek hatası:', error);
+                                // Hata durumunda uygun bir mesaj göster
+                                Swal.fire({
+                                    title: "Hata!",
+                                    text: "Tamamlama işlemi sırasında bir hata oluştu.",
+                                    icon: "error"
+                                });
+                            });
+                    }
                 });
             });
         });

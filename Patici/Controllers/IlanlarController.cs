@@ -1,6 +1,7 @@
 ﻿using Patici.EDMX;
 using Patici.Manager;
 using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -83,7 +84,6 @@ namespace Patici.Controllers
             if (ilan == null) return RedirectToAction("Index", "Home");
 
             ViewBag.Tur = new SelectList(IlanManager.GetIlanTurler().ToList(), "Id", "Ad");
-            ViewBag.Cins = new SelectList(IlanManager.GetCins().ToList(), "Id", "Ad");
             ViewBag.HayTur = new SelectList(IlanManager.GetHayvanTurler().ToList(), "Id", "Ad");
             ViewBag.Yas = new SelectList(IlanManager.GetHayvanYas().ToList(), "Id", "Ad");
 
@@ -91,10 +91,62 @@ namespace Patici.Controllers
         }
 
         [HttpPost]
-        public ActionResult IlanAyar(Ilan model, Guid IlanTur, bool Tasma, Guid YasID, HttpPostedFileBase[] IlanFotos )
+        public ActionResult IlanAyar(Ilan model, HttpPostedFileBase[] IlanFotos)
         {
+            if (IlanFotos.Length > 0)
+            {
+                int sira = 1;
+                foreach (var f in IlanFotos)
+                {
+                    if (f is null) continue;
+                    var fotoformat = Path.GetExtension(f.FileName);
+                    var fotoad = Guid.NewGuid() + fotoformat;
+                    var fotoyol = Path.Combine(Server.MapPath("/Upload/Ilanlar/" + fotoad));
+                    f.SaveAs(fotoyol);
+                    var yol = "/Upload/Ilanlar/" + fotoad;
 
-            return View();
+                    IlanManager.PostIlanHayvanGaleri(model.HayvanID, yol, sira);
+                    sira++;
+                }
+            }
+
+            var ilan = IlanManager.PostIlanAyar(model);
+
+            ViewBag.Tur = new SelectList(IlanManager.GetIlanTurler().ToList(), "Id", "Ad");
+            ViewBag.HayTur = new SelectList(IlanManager.GetHayvanTurler().ToList(), "Id", "Ad");
+            ViewBag.Yas = new SelectList(IlanManager.GetHayvanYas().ToList(), "Id", "Ad");
+
+            return View(ilan);
         }
+
+        [HttpPost]
+        public ActionResult IlanEkle(Guid KulDetayID, bool Tasma, Guid IlanTur, string HayvanAd, Guid TurID, Guid YasID, HttpPostedFileBase[] hayvanFotos, string HayvanAciklama)
+        {
+            var hayvan = IlanManager.PostHayvan(TurID, HayvanAciklama, HayvanAd, KulDetayID, Tasma, YasID);
+
+            if (hayvanFotos.Length > 0)
+            {
+                int sira = 1;
+                foreach (var f in hayvanFotos)
+                {
+                    var fotoformat = Path.GetExtension(f.FileName);
+                    var fotoad = Guid.NewGuid() + fotoformat;
+                    var fotoyol = Path.Combine(Server.MapPath("/Upload/Ilanlar/" + fotoad));
+                    f.SaveAs(fotoyol);
+                    var yol = "/Upload/Ilanlar/" + fotoad;
+
+                    IlanManager.PostIlanHayvanGaleri(hayvan.Id, yol, sira);
+                    sira++;
+                }
+            }
+
+            IlanManager.PostIlan(hayvan.Id, KulDetayID, IlanTur);
+
+            return RedirectToAction("Index", "Profil");
+        }
+
+        public bool IlanSil(Guid ilanId) => IlanManager.IlanSil(ilanId);
+
+        public bool IlanTamamla(Guid ilanId) => IlanManager.IlanTamamla(ilanId);
     }
 }

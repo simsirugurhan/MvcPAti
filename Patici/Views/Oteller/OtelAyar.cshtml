@@ -31,12 +31,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-12 mx-auto">
-                <form action="#" method="post" class="custom-form contact-form" role="form">
+                <form action="#" method="post" class="custom-form contact-form" role="form"  enctype="multipart/form-data">
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.KulDetayID)
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
                             <div class="form-floating mt-0">
-                                @Html.DropDownList("CinsID", (SelectList)ViewBag.Cins, " -Cins- ", new { @class = "select2 form-control", multiple = "multiple" })
-                                <label for="hotelTypeSelect">Hayvan Cinsi</label>
+                                @Html.DropDownList("CinsID", (SelectList)ViewBag.Cins, new { @class = "select2 form-control", multiple = "multiple" })
+                                <span>Otel Hayvan Cins(ler)i</span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12" id="hotelNameSection">
@@ -47,17 +49,16 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12" id="hotelTypeSection">
                             <div class="form-floating mt-0">
-                                @Html.DropDownList("FiyatID", (SelectList)ViewBag.Fiyat, " -Fiyat- ", new { @class = "select2 form-control" })
-                                <label for="FiyatID">Fiyat Aralığı</label>
+                                @Html.DropDownListFor(x=>x.KullaniciDetay.FiyatID, (SelectList)ViewBag.Fiyat, " -Fiyat- ", new { @class = "select2 form-control" })
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 ">
                             <div class="form-floating mt-0">
-                                <input type="text" id="datePicker" class="form-control">
+                                <input type="text" id="datePicker" class="form-control" name="kapaliGunler">
                                 <label for="datePicker">Kapalı olduğunuz günleri seçin</label>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12" id="documentUploadSection">
+                        <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group mb-4">
                                 <label for="belge">Belge</label>
                                 <input type="file" class="form-control-file" id="belge" name="belge">
@@ -66,13 +67,19 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group mb-4">
                                 <label for="fotolar"> Otel Fotoğrafları</label>
-                                <input type="file" class="form-control-file" id="fotolar" name="otelFoto" multiple>
+                                <input type="file" class="form-control-file" id="fotolar" name="otelFotos" multiple>
                             </div>
                         </div>
                         <div class="col-lg-12 col-12">
                             <div class="form-floating">
-                                @Html.TextAreaFor(x=>x.KullaniciDetay.Aciklama, new {placeholder = "Açıklama giriniz", @class = "form-control" })
+                                @Html.TextAreaFor(x => x.KullaniciDetay.Aciklama, new { placeholder = "Açıklama giriniz", @class = "form-control" })
                                 <label for="KullaniciDetay.Aciklama">Bilgileri buraya girebilirsiniz</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <div class="form-floating">
+                                @Html.CheckBoxFor(x => x.Yayin)
+                                <label for="Yayin" style="padding:0; padding-left:20px;">Yayınlansın mı?</label>
                             </div>
                         </div>
                         <div class="col-lg-4 col-12 ms-auto">
@@ -99,13 +106,18 @@
     <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ayrilmisTarihler = @Html.Raw(Json.Encode(ViewBag.AyrilmisTarihler));
+
         flatpickr("#datePicker", {
             mode: "multiple",
             dateFormat: "Y-m-d",
-           // defaultDate: ["2016-10-20", "2016-11-04"],
             minDate: "today",
-            "locale": "tr"
+            defaultDate: ayrilmisTarihler,
+            locale: "tr"
         });
         flatpickr.l10ns.default.firstDayOfWeek = 1; // Start week on Monday
+    });
     </script>
+
 }

@@ -18,7 +18,6 @@ namespace Patici.EDMX
         public HayvanTur()
         {
             this.Hayvans = new HashSet<Hayvan>();
-            this.OtelTurs = new HashSet<OtelTur>();
         }
     
         public System.Guid Id { get; set; }
@@ -29,7 +28,5 @@ namespace Patici.EDMX
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hayvan> Hayvans { get; set; }
         public virtual HayvanCin HayvanCin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OtelTur> OtelTurs { get; set; }
     }
 }

@@ -47,15 +47,16 @@ namespace Patici.Controllers
         {
             var model = new Kullanici();
             ViewBag.Sehir = new SelectList(LoginManager.GetSehir().ToList(), "Id", "Ad");
+            ViewBag.Tur = new SelectList(LoginManager.GetTur().ToList(), "Id", "Ad");
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult KayitOl(Kullanici kullanici)
+        public ActionResult KayitOl(Kullanici kullanici, Guid TurID)
         {
             //var login = new LoginManager();
-            var kul = LoginManager.Kaydol(kullanici).Result;
+            var kul = LoginManager.Kaydol(kullanici, TurID).Result;
 
             if (kul != null)
             {
@@ -67,6 +68,14 @@ namespace Patici.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult CikisYap()
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

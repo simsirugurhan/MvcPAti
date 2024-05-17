@@ -31,7 +31,8 @@ namespace Patici.Manager
             {
                 if (DateTime.TryParse(girisTarih, out DateTime girisTarihDt) && DateTime.TryParse(cikisTarih, out DateTime cikisTarihDt))
                 {
-                    oteller = oteller.Where(x => !db.OtelTarihs.Any(o => o.OtelID == x.Id && DbFunctions.TruncateTime(o.KapaliTarih) >= DbFunctions.TruncateTime(girisTarihDt) && DbFunctions.TruncateTime(o.KapaliTarih) <= DbFunctions.TruncateTime(cikisTarihDt) && !o.Sil));
+                    oteller = oteller.Where(x => !db.OtelTarihs.Any(o => o.OtelID == x.Id && DbFunctions.TruncateTime(o.KapaliTarih) >= DbFunctions.TruncateTime(girisTarihDt) 
+                    && DbFunctions.TruncateTime(o.KapaliTarih) <= DbFunctions.TruncateTime(cikisTarihDt) && !o.Sil));
                 }
             }
 

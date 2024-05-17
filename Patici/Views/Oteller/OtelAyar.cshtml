@@ -96,13 +96,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Select2 pluginini başlat
             $('.select2').select2({
                 allowClear: true
             });
         });
     </script>
-    <!-- Flatpickr Scripts -->
     <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
     <script>
@@ -116,8 +114,7 @@
             defaultDate: ayrilmisTarihler,
             locale: "tr"
         });
-        flatpickr.l10ns.default.firstDayOfWeek = 1; // Start week on Monday
+        flatpickr.l10ns.default.firstDayOfWeek = 1;
     });
     </script>
-
 }
